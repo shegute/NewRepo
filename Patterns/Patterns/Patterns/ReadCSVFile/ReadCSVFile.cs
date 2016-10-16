@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Patterns.RandomCode
 {
@@ -54,16 +52,16 @@ namespace Patterns.RandomCode
 
     public enum Categories
     {
-        Grocery,
-        DepartmentStore,
+        Cleaning,
         Clothing,
-        Movies,
-        Restaurant,
+        DepartmentStore,
         Entertainment,
         Flight,
-        Cleaning,
         Gas,
+        Grocery,
+        Movies,
         Others,
+        Restaurant,
         Unknown
     }
 
@@ -71,15 +69,21 @@ namespace Patterns.RandomCode
     public class Store
     {
         public string storeName;
-        public double value;
+        public double minValue;
 
         public Store(string name, double value)
         {
             this.storeName = name;
-            this.value = value;
+            this.minValue = value;
         }
+
     }
 
+    public interface DataAccessLayer
+    {
+        List<Store> LoadCategories();
+        List<Store> LoadStores();
+    }
     public class ReadCSVFile
     {
         public static void Run()
@@ -191,9 +195,9 @@ namespace Patterns.RandomCode
             {
                 if (entry.storeName.ToLowerInvariant().Contains(s.storeName.ToLowerInvariant()))
                 {
-                    if (s.value != 0)
+                    if (s.minValue != 0)
                     {
-                        if (System.Math.Abs(entry.purchaseAmount) >= s.value)
+                        if (System.Math.Abs(entry.purchaseAmount) >= s.minValue)
                         {
                             return true;
                         }

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Patterns
 {
-    class StrategyPatteryMainApp
+    class StrategyPatternMainApp
     {
         public static void Run()
         {
@@ -17,9 +15,9 @@ namespace Patterns
             pilot1.AddPlaneQualification(new B52());
             pilot1.AddPlaneQualification(new F16());
             pilot1.CurrentPlane = new B52();
-            pilot1.SetCurrentPlane(b52Plane);
-            pilot1.SetCurrentPlane(mig32Plane);
-            pilot1.SetCurrentPlane(f16Plane);
+            pilot1.FlyPlane(b52Plane);
+            pilot1.FlyPlane(mig32Plane);
+            pilot1.FlyPlane(f16Plane);
             
             // Wait for user
             Console.ReadKey();
@@ -38,6 +36,7 @@ namespace Patterns
         public override void FlyPlane(string pilotName)
         {
             Console.WriteLine("{0} is flying this B52 plane", pilotName);
+            Console.WriteLine("Set rudder high, accelarate after 2 seconds");
         }
     }
 
@@ -47,6 +46,7 @@ namespace Patterns
         public override void FlyPlane(string pilotName)
         {
             Console.WriteLine("{0} is flying this F16 plane", pilotName);
+            Console.WriteLine("Set rudder low, accelarate after 10 seconds");
         }
     }
 
@@ -56,13 +56,13 @@ namespace Patterns
         public override void FlyPlane(string pilotName)
         {
             Console.WriteLine("{0} is flying this Mig32 plane", pilotName);
+            Console.WriteLine("Set rudder mid, accelarate after 5 seconds");
         }
     }
 
     public class Pilot
     {
         private string pilotName;
-        private Plane currentPlane;
         private List<Plane> planeQualifications = new List<Plane>();
 
         public Pilot(string name)
@@ -75,7 +75,7 @@ namespace Patterns
             planeQualifications.Add(plane);
         }
 
-        public bool SetCurrentPlane(Plane plane)
+        public bool FlyPlane(Plane plane)
         {
             bool qualified =
                 this.planeQualifications.Any(p => p.GetType() == plane.GetType());
@@ -104,14 +104,7 @@ namespace Patterns
 
         public Plane CurrentPlane
         {
-            get
-            {
-                return this.currentPlane ;
-            }
-            set
-            {
-                this.currentPlane = value;
-            }
+            get; set;
         }
     }
 

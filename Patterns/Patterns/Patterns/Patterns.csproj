@@ -32,7 +32,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,29 +51,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PatternCode\CompositePattern.cs" />
-    <Compile Include="PatternCode\IteratorPattern.cs" />
+    <Compile Include="PatternCode\Behavioral\VisitorPattern.cs" />
+    <Compile Include="PatternCode\Creational\AbstractFactoryPattern.cs" />
+    <Compile Include="PatternCode\Creational\BuilderPattern.cs" />
+    <Compile Include="PatternCode\Behavioral\ChainOfResponsibilityPattern.cs" />
+    <Compile Include="PatternCode\Structural\AdapterPattern.cs" />
+    <Compile Include="PatternCode\Structural\CompositePattern.cs" />
+    <Compile Include="PatternCode\Creational\FactoryPattern.cs" />
+    <Compile Include="PatternCode\Behavioral\IteratorPattern.cs" />
+    <Compile Include="PatternCode\Behavioral\MediatorPattern.cs" />
+    <Compile Include="PatternCode\Behavioral\ObserverPattern.cs" />
+    <Compile Include="PatternCode\Creational\PrototypePattern.cs" />
+    <Compile Include="PatternCode\Behavioral\StrategyPattern2.cs" />
+    <Compile Include="PatternCode\Behavioral\TemplatePattern.cs" />
     <Compile Include="RandomCode\AsyncCode.cs" />
-    <Compile Include="RandomCode\Cash.cs" />
+    <Compile Include="RandomCode\BlockingCollectionDemo.cs" />
+    <Compile Include="RandomCode\ByRef.cs" />
+    <Compile Include="RandomCode\CertFinder.cs" />
+    <Compile Include="RandomCode\ConcurrentBagDemo.cs" />
+    <Compile Include="RandomCode\ConcurrentDictionaryDemo.cs" />
+    <Compile Include="RandomCode\ConcurrentQueueDemo.cs" />
+    <Compile Include="RandomCode\ConcurrentStackDemo.cs" />
+    <Compile Include="RandomCode\EnumDisplay.cs" />
+    <Compile Include="RandomCode\FuncAndActinDemo.cs" />
+    <Compile Include="RandomCode\GenericCollectionMethod.cs" />
+    <Compile Include="RandomCode\IProducerConsumerCollectionImplementationDemo.cs" />
+    <Compile Include="RandomCode\IteratorYieldDemo.cs" />
+    <Compile Include="RandomCode\RuleDef.cs" />
+    <Compile Include="RandomCode\ShoAction.cs" />
+    <Compile Include="RandomCode\Strs.cs" />
+    <Compile Include="RandomCode\Times.cs" />
+    <Compile Include="ReadCSVFile\Cash.cs" />
     <Compile Include="RandomCode\EventsAndDelegatess3.cs" />
     <Compile Include="RandomCode\EventsAndDelegates2.cs" />
     <Compile Include="RandomCode\EventsAndDelegates.cs" />
     <Compile Include="RandomCode\LamdaMethods..cs" />
+    <Compile Include="RandomCode\Maybe.cs" />
     <Compile Include="RandomCode\Overrides.cs" />
-    <Compile Include="PatternCode\RealCompositePattern.cs" />
-    <Compile Include="PatternCode\RealSingeltonOptimizedPattern.cs" />
-    <Compile Include="PatternCode\RealSingletonPattern.cs" />
-    <Compile Include="PatternCode\DecoratorPattern.cs" />
+    <Compile Include="PatternCode\Structural\DecoratorPattern.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PatternCode\RealWorldDecoratorPattern.cs" />
-    <Compile Include="PatternCode\SingletonPattern.cs" />
-    <Compile Include="PatternCode\StrategyPattery.cs" />
-    <Compile Include="RandomCode\ReadCSVFile.cs" />
+    <Compile Include="PatternCode\Creational\SingletonPattern.cs" />
+    <Compile Include="PatternCode\Behavioral\StrategyPattern.cs" />
+    <Compile Include="ReadCSVFile\ReadCSVFile.cs" />
     <Compile Include="RandomCode\TimerCode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Sort\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

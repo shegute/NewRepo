@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Patterns.RandomCode
 {
@@ -34,6 +30,9 @@ namespace Patterns.RandomCode
             {
                 turumbaTenefa1(time, place);
             }
+            //You can also attach the EventHandler directly to the event and invoke the event. Weird tho!
+            //turumbaTenefa += this.EdertegnochJoro;
+            //'turumbaTenefa += this.NonEdertegnochJoro;
             //if (turumbaTenefa != null)
             //{
             //    turumbaTenefa(time, place);
@@ -42,26 +41,32 @@ namespace Patterns.RandomCode
 
         public void OnTurumbaTesema()
         {
-            EventHandler turumbaTesema1 = TurumbaTesema as EventHandler;
+            //EventHandler turumbaTesema1 = TurumbaTesema as EventHandler;
+            //turumbaTesema1 += this.EderDeresu;
+            //Or you can declare as below since there is only a single handler for this delegate.
+
+            EventHandler turumbaTesema1 = new EventHandler(this.EderDeresu);
             if (turumbaTesema1 != null)
             {
                 turumbaTesema1(this, EventArgs.Empty);
             }
         }
 
-        private   void EdertegnochJoro(int time, string place)
+        private void EdertegnochJoro(int time, string place)
         {
             Console.WriteLine("I heard we have to go to {0} at {1}", place, time);
         }
 
-        private   void NonEdertegnochJoro(int time, string place)
+        private void NonEdertegnochJoro(int time, string place)
         {
             Console.WriteLine("I heard edertegnoch have to go to {0} at {1}", place, time);
             Console.WriteLine("Lucky I am not edertegna :).");
         }
 
-        public void EderDeresu()
-        { Console.WriteLine("Hulum dersu"); }
+        public void EderDeresu(object s, EventArgs e)
+        {
+            Console.WriteLine("Hulum dersu");
+        }
         public event TurumbaTenefaHandler turumbaTenefa;
         public event EventHandler TurumbaTesema;
     }

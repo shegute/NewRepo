@@ -1,20 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DoFactory.GangOfFour.Decorator.Structural;
-using DoFactory.GangOfFour.Singleton.Structural;
-using DoFactory.GangOfFour.Singleton.RealWorld;
-using DoFactory.GangOfFour.Singleton.NETOptimized;
-using DoFactory.GangOfFour.Composite.RealWorld;
-using DoFactory.GangOfFour.Composite.Structural;
-using DoFactory.GangOfFour.Decorator.RealWorld;
-using DoFactory.GangOfFour.Iterator.Structural;
+﻿using Patterns.RandomCode;
 
-namespace Patterns
+namespace DoFactory.GangOfFour
 {
-    using Patterns.RandomCode;
 
     class Program
     {
@@ -28,7 +15,7 @@ namespace Patterns
             //CompositeMainApp.Run();
             //RealCompositePatternMainApp.Run();
             //OverrideAndNew.OverrideAndNew.AppMain();
-            //StrategyPatteryMainApp.Run();
+            //StrategyPatternMainApp.Run();
             //IteratorMainApp.Run();
             //AsyncCodeRunner.Run();
             //TimerCode.Run();
@@ -37,8 +24,41 @@ namespace Patterns
             //EventsAndDelegates2.Run();
             //EventsAndDelegates3.Run();
             //LamdaMethods.Run();
-            ReadCSVFile.Run();
+            //ReadCSVFile.Run(); //....banking app
+            //************************************************write room mate app in solid
+            //Maybe<string>.Run();
+            //*********************************************************Patterns
+            //RealWorldObserverPattern.Run();
+            //AbstractFactoryMainApp.Run();
+            //BuilderMainApp.Run();
+            //ChainOfResponsibilityPattern.Run();
+            //TemplatePatternMainApp.Run();
+            //MediatorPatternMainApp.Run();
+            //PrototypePattern.Run();
+            //FactoryPattern.Run();
+            //StrategyPattern2.Run();
+            //VisitorPatternMainApp.Run();
+            //AdapterPattern.Run();
+            //*********************************************************Patterns
+            //ShoAction.Run(args);
+            //GenericCollectionMethod.Run();
+            //RuleDef.Run();
+            //EnumDisplay.Run();
+            //Strs.Run();
+            //CertFinder.Run();
+            //Times.Run();
+            //ByRef.Run();
+            //***************************************************************Collection
+            //BlockingCollectionDemo.Run();
+            //ConcurrentBagDemo.Run();
+            //ConcurrentDictionaryDemo.Run();
+            //ConcurrentQueueDemo.Run();
+            //ConcurrentStackDemo.Run();
+            //IProducerConsumerCollectionImplementationDemo.Run();
+            //***************************************************************Collection
 
+            //FuncAndActinDemo.Run();
+            IteratorYieldDemo.Run();
         }
     }
 }

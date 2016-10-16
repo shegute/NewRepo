@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Patterns.RandomCode
 {/// <summary>The status of the incident in the incident queue.</summary>
