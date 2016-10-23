@@ -1,0 +1,163 @@
+﻿===== 2016-07-29 15:40:47 (PDT) edited by Shravan Kumar (TEXAS) (shravank) =====
+
+
+ 1. Azure AD tenant ID and name, preferably also verified domain
+
+Azure AD tenant ID:701edd3e-c7a8-4789-b1ce-8a243620d68f
+
+MOERA NAME: hasbroinc.onmicrosoft.com
+
+Verified domain : hasbro.com and 45 other domains.
+
+2. Contact email for the customer, which we can talk to directly
+
+Lynne Silvia +1 (401)431-8682 or 401-225-8462 or email lynne.silvia@hasbro.com
+
+3. Application name and instance identifier.
+
+a. Easiest way to obtain this information is to ask customer to provide full browser URL while being on application's Quick Start or Attributes page.
+
+Application Name: ServiceNow
+
+ServiceNow instance name: Hasbro
+
+Service now Admin User name: system_administrator@hasbro.com
+
+
+ 4. Time range (down to AT LEAST an hour in a specified timezone) at which issue occurred and relevant error message in Azure or the application
+
+Multiple: Please refer attached.
+ 5. Detailed description:
+ a. What customer did or observed, providing the timeline for the steps performed
+
+Customer is using AAD User provisioning to provision users to Service Now ( On premises server). This was working up until 7-18 and stopped working.
+ No errors/events in the User provioning activity. If we restart it, we see that the process restarted but nothing thereafter.
+  
+
+b. What is the expected outcome, and what is actual outcome
+ Customer is making numerous changes to AD on a daily changes but no changes are propagated to ServiceNow.
+
+
+ 6. When issue affects one or more users:
+ a. UPN and/or User ID of the (at least one) user which demonstrates the issue, with the time when the issue occurred with that user. That is absolutely required for us to be able to investigate the logs in relation to what happened.
+
+All of the users in the tenant but you can use silvial@na.hasbro.com as a sample.
+
+
+ b. If investigation relates to particular attributes not being synchronized as expected, or user being enabled/disabled in unexpected way:
+
+All attributes fail.
+ i. When, and what modifications were done to the user before the issue surfaced
+
+It stopped abruptly on 7-18-1.37:15 pm central time.
+
+
+ 7. And finally, most issues can be self-diagnosed by customer and CSS by leveraging "Account provisioning activity report". Please narrow down the search by filtering on "application", "time" and "user" to find relevant logs. The reports shows a maximum of 50K entries, so please ensure to filter the time range or user identifier to get accurate results. If the answer is not immediately obvious from the reports, then please provide a copy of that report for further investigation.
+
+Please see attached.
+
+ 
+
+ 
+
+All it says it "Provisioning to ServiceNow was configured and started"
+
+===== 2016-07-29 15:31:57 (PDT) reactivated by Shravan Kumar (TEXAS) (shravank) =====
+Issue is unresolved.
+===== 2016-07-29 14:52:53 (PDT) resolved by Pranay Pratap (pranayp) =====
+Auto Resolving incident
+===== 2016-07-29 14:52:53 (PDT) mitigated by Pranay Pratap (pranayp) =====
+Required information is missing.
+
+Provide the following info (https://microsoft.sharepoint.com/teams/adiamteam/_layouts/OneNote.aspx?id=%2Fteams%2Fadiamteam%2FDev%20Docs%2FSyncFabric%2FSync%20Fabric%20OneNote&wd=target%28Live%20Site.one%7C6F243DBE-A15F-46E0-91BD-708B604D94D7%2FProvisioning%20incidents%20required%20information%7C0124E1AF-491A-4D0B-AF2C-2B8D64C20A21%2F%29
+onenote:https://microsoft.sharepoint.com/teams/adiamteam/Dev%20Docs/SyncFabric/Sync%20Fabric%20OneNote/Live%20Site.one#Provisioning%20incidents%20required%20information&section-id={6F243DBE-A15F-46E0-91BD-708B604D94D7}&page-id={0124E1AF-491A-4D0B-AF2C-2B8D64C20A21}&end):
+
+In order for Provisioning incident to be actionable from our side we require the following information to be provided
+
+	1. Azure AD tenant ID and name, preferably also verified domain 
+	2. Contact email for the customer, which we can talk to directly
+	3. Application name and instance identifier. 
+	a. Easiest way to obtain this information is to ask customer to provide full browser URL while being on application's Quick Start or Attributes page.
+	4. Time range (down to AT LEAST an hour in a specified timezone) at which issue occurred and relevant error message in Azure or the application
+	5. Detailed description:
+	a. What customer did or observed, providing the timeline for the steps performed
+	b. What is the expected outcome, and what is actual outcome
+
+	6. When issue affects one or more users:
+	a. UPN and/or User ID of the (at least one) user which demonstrates the issue, with the time when the issue occurred with that user. That is absolutely required for us to be able to investigate the logs in relation to what happened.
+	b. If investigation relates to particular attributes not being synchronized as expected, or user being enabled/disabled in unexpected way:
+	i. When, and what modifications were done to the user before the issue surfaced
+	7. And finally, most issues can be self-diagnosed by customer and CSS by leveraging "Account provisioning activity report". Please narrow down the search by filtering on "application", "time" and "user" to find relevant logs. The reports shows a maximum of 50K entries, so please ensure to filter the time range or user identifier to get accurate results. If the answer is not immediately obvious from the reports, then please provide a copy of that report for further investigation.
+
+	 
+
+
+
+
+
+
+
+
+
+
+
+
+Trouble Shooting
+Salesforce
+1) Invalid Field
+
+	Sample Error Message: 
+	INVALID_FIELD: UserPermissionsSupportUser, Dept_Code__c, Manager_Text__c, Office_Location__c ^ ERROR at Row:1:Column:527 No such column 'Manager_Text__c' on entity 'User'. 
+
+	Resolution:
+	In this case, the customer has a custom field that is not visible to the user that is provided for Account Provisioning. Customer will need to either provide a user with the correct privilege or set the related field's security profile to allow the same user to modify.
+
+
+
+
+
+
+
+
+
+===== 2016-07-29 07:38:08 (PDT) submitted by connector AADUX-SDE =====
+07/29/2016 14:34:39 Created by shravank
+********* Generated by CXPWEB SWT. Request ISSR659541 *********
+============================
+-Problem-
+============================
+
+Instance
+IAM Services
+
+Component
+SaaS App Management
+
+Scenario
+User Provisioning
+
+Date & Time issue occurred
+7/29/2016 7:27:00 AM
+
+Detailed Description of Issue
+Customer is using AAD User provisioning to provision users to Service Now ( On premises server). This was working up until 7-18 and stopped working. 
+Customer has another service now Staging instance which was failing too but mysteriously started working on 7-27.
+
+No errors/events in the User provioning activity. If we restart it, we see that the process restarted but nothing thereafter
+
+Repro Steps
+Logon to Azure Portal
+Click Active Directory
+Click Applications
+Click ServiceNow
+Check for Provisioning Activity
+
+Business Impact
+Hasbro is unable to provision users and groups to Servicenow since 7-18
+
+============================
+-GeneralInfo-
+============================
+
+Outage Duration
+11 days
