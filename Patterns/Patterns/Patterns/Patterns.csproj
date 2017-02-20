@@ -65,6 +65,7 @@
     <Compile Include="PatternCode\Behavioral\StrategyPattern2.cs" />
     <Compile Include="PatternCode\Behavioral\TemplatePattern.cs" />
     <Compile Include="RandomCode\AsyncCode.cs" />
+    <Compile Include="RandomCode\AsyncCode2.cs" />
     <Compile Include="RandomCode\BlockingCollectionDemo.cs" />
     <Compile Include="RandomCode\ByRef.cs" />
     <Compile Include="RandomCode\CertFinder.cs" />

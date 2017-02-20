@@ -5,11 +5,12 @@ namespace Patterns.RandomCode
 {
     class AsyncCode
     {
-        public async void PrintSumAsync()
+        public async Task<int> PrintSumAsync()
         {
             int value1 = await GetValueAsync();
             int value2 = await GetValueAsync();
             Console.WriteLine("Sum of two random numbers is: {0}", value1 + value2);
+            return 0;
         }
 
         private async Task<int> GetValueAsync()
@@ -31,10 +32,10 @@ namespace Patterns.RandomCode
 
     public static class AsyncCodeRunner
     {
-        public static void Run()
+        public async static void Run()
         {
             var a = new AsyncCode();
-            a.PrintSumAsync();
+            await a.PrintSumAsync();
             a.SecondMethod();
         }
     }

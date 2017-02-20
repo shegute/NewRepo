@@ -18,11 +18,22 @@ namespace Patterns.RandomCode
         public static IEnumerable<string> NameEnumerable()
         {
             //return names;
-            ICollection<string> names = namesInDB; 
+            ICollection<string> names = namesInDB;
             foreach (var name in names)
             {
                 string helloname = "Hello " + name;
-                 yield return helloname;
+                yield return helloname;
+            }
+        }
+
+        public static IEnumerable<string> NameEnumerable2()
+        {
+            //return names;
+            ICollection<string> names = namesInDB;
+            foreach (var name in names)
+            {
+                string helloname = "Hello " + name;
+                yield return helloname;
             }
         }
 

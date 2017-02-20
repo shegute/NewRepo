@@ -57,8 +57,9 @@ namespace DoFactory.GangOfFour
             //IProducerConsumerCollectionImplementationDemo.Run();
             //***************************************************************Collection
 
-            //FuncAndActinDemo.Run();
-            IteratorYieldDemo.Run();
+            FuncAndActinDemo.Run();
+            //IteratorYieldDemo.Run();
+            //AsyncCode2.AsyncCodeRunner2.Run();
         }
     }
 }
