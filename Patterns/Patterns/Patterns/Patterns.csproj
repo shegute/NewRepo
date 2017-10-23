@@ -44,6 +44,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExamCode\Exam70-483\AsyncRentrancy.cs" />
+    <Compile Include="ExamCode\Exam70-483\AsyncCancellation.cs" />
+    <Compile Include="ExamCode\Exam70-483\AsyncSequencing.cs" />
+    <Compile Include="ExamCode\Exam70-483\AsyncExampleWPF.cs" />
+    <Compile Include="ExamCode\Exam70-483\ThreadSynchronizationManual.cs" />
+    <Compile Include="ExamCode\Exam70-483\ThreadSynchronizationAuto.cs" />
+    <Compile Include="ExamCode\Exam70-483\ThreadSynchronization.cs" />
+    <Compile Include="ExamCode\Exam70-483\ThreadTimer.cs" />
     <Compile Include="PatternCode\Behavioral\VisitorPattern.cs" />
     <Compile Include="PatternCode\Creational\AbstractFactoryPattern.cs" />
     <Compile Include="PatternCode\Creational\BuilderPattern.cs" />
@@ -78,6 +87,7 @@
     <Compile Include="RandomCode\GenericCollectionMethod.cs" />
     <Compile Include="RandomCode\IProducerConsumerCollectionImplementationDemo.cs" />
     <Compile Include="RandomCode\IteratorYieldDemo.cs" />
+    <Compile Include="RandomCode\RandomStuff.cs" />
     <Compile Include="RandomCode\RuleDef.cs" />
     <Compile Include="RandomCode\ShoAction.cs" />
     <Compile Include="RandomCode\Strs.cs" />

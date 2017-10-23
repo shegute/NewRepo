@@ -1,3 +1,9 @@
 ﻿Ken, Burns, Male
 Mallory, Erwin, Female
 Bernita, Marlo, Female
+Billy, Joel, Male
+Laura, Inghram, Female
+John, Voight, Male
+Billy, Burns, Male
+Sinead, O'connor, Female
+Hala, Rufa, Female

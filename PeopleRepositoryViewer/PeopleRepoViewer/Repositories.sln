@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryTest", "Repositor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories.Injector", "Repositories.Injector\Repositories.Injector.csproj", "{6B088B42-F0A2-4E9B-B5B5-6AB64F65D0F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleUIViewer", "PeopleUIViewer\PeopleUIViewer.csproj", "{30E128D9-D8EF-41EB-B488-DADBD29F7536}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{6B088B42-F0A2-4E9B-B5B5-6AB64F65D0F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B088B42-F0A2-4E9B-B5B5-6AB64F65D0F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B088B42-F0A2-4E9B-B5B5-6AB64F65D0F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30E128D9-D8EF-41EB-B488-DADBD29F7536}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30E128D9-D8EF-41EB-B488-DADBD29F7536}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30E128D9-D8EF-41EB-B488-DADBD29F7536}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30E128D9-D8EF-41EB-B488-DADBD29F7536}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

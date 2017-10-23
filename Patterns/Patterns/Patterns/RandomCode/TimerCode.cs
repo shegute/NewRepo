@@ -63,7 +63,7 @@ namespace Patterns.RandomCode
 
             // Wait to continue.
             Console.WriteLine("Main method complete. Press Enter.");
-            Console.ReadLine();
+           // Console.ReadLine();
         }
     }
 }

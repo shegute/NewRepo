@@ -1,4 +1,5 @@
-﻿using Patterns.RandomCode;
+﻿using Patterns.ExamCode.Exam70_483;
+using Patterns.RandomCode;
 
 namespace DoFactory.GangOfFour
 {
@@ -57,9 +58,18 @@ namespace DoFactory.GangOfFour
             //IProducerConsumerCollectionImplementationDemo.Run();
             //***************************************************************Collection
 
-            FuncAndActinDemo.Run();
-            //IteratorYieldDemo.Run();
+            //FuncAndActinDemo.Run();
+            IteratorYieldDemo.Run();
             //AsyncCode2.AsyncCodeRunner2.Run();
-        }
+            //RandomStuff.Run();
+            //AsyncExampleWPF.Run();
+            //AsyncSequencing.Run();
+            //AsyncCancellation.Run();
+            //AsyncRentrancy.Run();
+            //ThreadSynchronization.Run();
+            //ThreadSynchronizationAuto.Run();
+            //ThreadSynchronizationManual.Run();
+            //ThreadTimer.Run();
+            }
     }
 }

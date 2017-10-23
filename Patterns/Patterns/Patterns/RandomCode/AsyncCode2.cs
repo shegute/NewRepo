@@ -101,7 +101,7 @@ namespace Patterns.RandomCode
                 int task6 = await ReturnIntAsync(3000);
 
                 Console.WriteLine("This is the value from ReturnIntAsync (has ShowIntAsync.Start before it):{0}", task6);
-                Console.ReadLine();
+               // Console.ReadLine();
             }
 
         }
