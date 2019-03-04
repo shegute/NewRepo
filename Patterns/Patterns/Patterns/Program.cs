@@ -27,7 +27,7 @@ namespace DoFactory.GangOfFour
             //LamdaMethods.Run();
             //ReadCSVFile.Run(); //....banking app
             //************************************************write room mate app in solid
-            //Maybe<string>.Run();
+            Maybe<string>.Run();
             //*********************************************************Patterns
             //RealWorldObserverPattern.Run();
             //AbstractFactoryMainApp.Run();
@@ -59,7 +59,7 @@ namespace DoFactory.GangOfFour
             //***************************************************************Collection
 
             //FuncAndActinDemo.Run();
-            IteratorYieldDemo.Run();
+            //IteratorYieldDemo.Run();
             //AsyncCode2.AsyncCodeRunner2.Run();
             //RandomStuff.Run();
             //AsyncExampleWPF.Run();
