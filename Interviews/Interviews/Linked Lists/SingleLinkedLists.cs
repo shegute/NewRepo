@@ -20,9 +20,9 @@ namespace Interviews.Linked_Lists
 
     public class Node
     {
-        public int Value { get; set; }
+        public string Value { get; set; }
         public Node Next { get; set; }
-        public Node(int v, Node n)
+        public Node(string v, Node n)
         { this.Value = v; this.Next = n; }
     }
 
@@ -35,23 +35,30 @@ namespace Interviews.Linked_Lists
             Node temp = null;
             if (this.Head != null)
             { temp = this.Head; this.Head = this.Head.Next; temp.Next = null; }
+
+            Console.WriteLine($"###INFO:Pop() Succeded.");
             return temp;
         }
         public void Push(Node newNode)
         {
             //if (this.Head != null) {
             newNode.Next = this.Head; this.Head = newNode;
+
+            Console.WriteLine($"###INFO:Push({newNode.Value}) Succeded.");
             //}
         }
 
 
         public static void Run()
         {
-            StackSLL stack = new StackSLL(new Node(0, null));
-            stack.Push(new Node(1, null));
-            stack.Push(new Node(2, null));
+            Console.WriteLine($"");
+            Console.WriteLine($"");
+            Console.WriteLine($"###StackSLL.RUN.");
+            StackSLL stack = new StackSLL(new Node("A", null));
+            stack.Push(new Node("B", null));
+            stack.Push(new Node("C", null));
             SingleLinkedLists.PrintNode(stack.Pop());
-            stack.Push(new Node(3, null));
+            stack.Push(new Node("D", null));
             SingleLinkedLists.Print(stack.Head);
             while (stack.Head != null) { SingleLinkedLists.PrintNode(stack.Pop()); }
         }
@@ -75,53 +82,67 @@ namespace Interviews.Linked_Lists
                     if (cur.Value == this.Tail.Value) { this.Tail = newNode; }
                     //if (null == this.Tail) { this.Tail = newNode; }
                     //if (null == this.Head) { this.Head = newNode; }
+
+                    Console.WriteLine($"###INFO:InsertAfter({markerNode.Value}, {newNode.Value}) Succeded.");
                     return true;
                 }
                 cur = cur.Next;
             }
 
+            Console.WriteLine($"###INFO:InsertAfter({markerNode.Value}, {newNode.Value}) Failed.");
             return false;
         }
         public bool Remove(Node markerNode)
         {
             Node cur = this.Head; Node cur2 = this.Head;
-            if (cur.Value == markerNode.Value) { this.Head = this.Head.Next; if (cur.Value == this.Tail.Value) { this.Tail = null; } return true; }
+            if (cur.Value == markerNode.Value)
+            {
+                this.Head = this.Head.Next; if (cur.Value == this.Tail.Value) { this.Tail = null; }
+                Console.WriteLine($"###INFO:Remove({markerNode.Value}) Succeded.");
+                return true;
+            }
             while (cur != null)
             {
                 cur = cur.Next;
                 if (cur.Value == markerNode.Value) {
                     cur2.Next = cur.Next; if (cur.Value == this.Tail.Value) { this.Tail = cur2; }
+
+                    Console.WriteLine($"###INFO:Remove({markerNode.Value}) Succeded.");
                     return true; }
                 cur2 = cur2.Next;
             }
 
+            Console.WriteLine($"###INFO:Remove({markerNode.Value}) Failed.");
             return false;
         }
 
         public static void Run()
         {
-            MaintainHeadNTail m = new MaintainHeadNTail(new Node(0, null));
+            Console.WriteLine($"");
+            Console.WriteLine($"");
+            Console.WriteLine($"###MaintainHeadNTail.RUN().");
+            MaintainHeadNTail m = new MaintainHeadNTail(new Node("A", null));
             SingleLinkedLists.PrintNode(m.Head);
             SingleLinkedLists.PrintNode(m.Tail);
             SingleLinkedLists.Print(m.Head);
-            m.InsertAfter(new Node(0, null), new Node(1, null));
+            m.InsertAfter(new Node("A", null), new Node("B", null));
             SingleLinkedLists.PrintNode(m.Head);
             SingleLinkedLists.PrintNode(m.Tail);
             SingleLinkedLists.Print(m.Head);
-            m.InsertAfter(new Node(0, null), new Node(2, null));
+            m.InsertAfter(new Node("A", null), new Node("C", null));
             SingleLinkedLists.PrintNode(m.Head);
             SingleLinkedLists.PrintNode(m.Tail);
             SingleLinkedLists.Print(m.Head);
 
-            m.Remove(new Node(0, null));
+            m.Remove(new Node("A", null));
             SingleLinkedLists.PrintNode(m.Head);
             SingleLinkedLists.PrintNode(m.Tail);
             SingleLinkedLists.Print(m.Head);
-            m.Remove(new Node(1, null));
+            m.Remove(new Node("B", null));
             SingleLinkedLists.PrintNode(m.Head);
             SingleLinkedLists.PrintNode(m.Tail);
             SingleLinkedLists.Print(m.Head);
-            m.Remove(new Node(2, null));
+            m.Remove(new Node("C", null));
             SingleLinkedLists.PrintNode(m.Head);
             SingleLinkedLists.PrintNode(m.Tail);
             SingleLinkedLists.Print(m.Head);

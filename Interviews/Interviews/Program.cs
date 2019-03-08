@@ -11,7 +11,7 @@ namespace Interviews
     {
         static void Main(string[] args)
         {
-            //StackSLL.Run();
+            StackSLL.Run();
             MaintainHeadNTail.Run();
         }
     }
