@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Interviews.Linked_Lists
+namespace Interviews.Linked_Lists.SingleLinkedLists
 {
     public class SingleLinkedLists
     {
@@ -104,11 +104,13 @@ namespace Interviews.Linked_Lists
             while (cur != null)
             {
                 cur = cur.Next;
-                if (cur.Value == markerNode.Value) {
+                if (cur.Value == markerNode.Value)
+                {
                     cur2.Next = cur.Next; if (cur.Value == this.Tail.Value) { this.Tail = cur2; }
 
                     Console.WriteLine($"###INFO:Remove({markerNode.Value}) Succeded.");
-                    return true; }
+                    return true;
+                }
                 cur2 = cur2.Next;
             }
 
@@ -148,6 +150,49 @@ namespace Interviews.Linked_Lists
             SingleLinkedLists.Print(m.Head);
 
 
+        }
+    }
+
+    public class MthToLastElement
+    {
+        public Node Head { get; set; }
+        public MthToLastElement(Node head) { this.Head = head; }
+
+        public Node ReturnMthToLastElement(int m)
+        {
+            Node curNode = this.Head;
+            Node curNode2 = this.Head;
+            int count = 0;
+            while (m > count++ && curNode != null)
+            {
+                curNode = curNode.Next;
+                if (m == count)
+                {
+                    return curNode2;
+                }
+
+                curNode2 = curNode2.Next;
+            }
+
+            Console.WriteLine($"{m} node not found, since list was only {count} nodes long");
+            return null;
+        }
+        public static void Run()
+        {
+            Console.WriteLine($"");
+            Console.WriteLine($"");
+            Console.WriteLine($"###MthToLastElement.RUN().");
+            MthToLastElement mthToLast = new MthToLastElement(new Node("A", new Node("b", new Node("c", new Node("d", new Node("E", null))))));
+            Console.WriteLine($"###Calling ReturnMthToLastElement(5).");
+            SingleLinkedLists.Print(mthToLast.ReturnMthToLastElement(5));
+            Console.WriteLine($"###Calling ReturnMthToLastElement(1).");
+            SingleLinkedLists.Print(mthToLast.ReturnMthToLastElement(1));
+            Console.WriteLine($"###Calling ReturnMthToLastElement(3).");
+            SingleLinkedLists.Print(mthToLast.ReturnMthToLastElement(3));
+            Console.WriteLine($"###Calling ReturnMthToLastElement(4).");
+            SingleLinkedLists.Print(mthToLast.ReturnMthToLastElement(4));
+            Console.WriteLine($"###Calling ReturnMthToLastElement(6).");
+            SingleLinkedLists.Print(mthToLast.ReturnMthToLastElement(6));
         }
     }
 }
