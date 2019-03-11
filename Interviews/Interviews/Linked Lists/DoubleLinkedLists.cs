@@ -38,6 +38,16 @@ namespace Interviews.Linked_Lists.DoubleLinkedLists
             while (temp2 != null) { temp2 = curNode.Next; temp2 = PrintAllNodesIncludingChildren(temp2); }
             return null;
         }
+        public static void PrintAllNodesIncludingChildren2(Node head)
+        {
+            if (head == null) { Console.WriteLine($"List is empty"); return ; }
+            Console.WriteLine($"Print all nodes including children for node{head.Value}.");
+            Node curNode = head;
+            PrintNode(curNode);
+            PrintAllNodesIncludingChildren2(curNode.Child);  
+             PrintAllNodesIncludingChildren2(curNode.Next);  
+            return  ;
+        }
         //public static Node PrintAllNodesIncludingChildrenReverse(Node head)
         //{ // NOT SURE IF THIS IS POSSIBLE TO ACHIEVE WITHOUT  ALOT OF BUGS oR SPECIAL CODE
         //    Console.WriteLine($"Print all nodes including children in reverse");
@@ -119,6 +129,10 @@ namespace Interviews.Linked_Lists.DoubleLinkedLists
         }
         public static void Run()
         {
+            Console.WriteLine($"");
+            Console.WriteLine($"");
+            Console.WriteLine($"###FlattenList.RUN().");
+
             Node b1c = new Node("B1C", null, null, null);
             Node b1b = new Node("B1B", b1c, null, null);
             b1c.Previous = b1b;
@@ -145,19 +159,29 @@ namespace Interviews.Linked_Lists.DoubleLinkedLists
 
             FlattenList flattenList = new FlattenList(a, c);
 
+            Console.WriteLine($"###Calling Print({a.Value}).");
             DoubleLinkedLists.Print(a);
+            Console.WriteLine($"###Calling PrintReverse({a.Value}).");
             DoubleLinkedLists.PrintReverse(a);
+            Console.WriteLine($"###Calling PrintAllNodesIncludingChildren({a.Value}).");
             DoubleLinkedLists.PrintAllNodesIncludingChildren(a);
             //DoubleLinkedLists.PrintAllNodesIncludingChildrenReverse(a);
 
             flattenList.ReturnFlattenedList();
+            Console.WriteLine($"###Calling Print({flattenList.Head.Value}).");
             DoubleLinkedLists.Print(flattenList.Head);
+            Console.WriteLine($"###Calling PrintReverse({flattenList.Tail.Value}).");
             DoubleLinkedLists.PrintReverse(flattenList.Tail);
 
             flattenList.ReturnUnFlattenedList();
+            Console.WriteLine($"###Calling Print({flattenList.Head.Value}).");
             DoubleLinkedLists.Print(flattenList.Head);
+            Console.WriteLine($"###Calling PrintReverse({flattenList.Tail.Value}).");
             DoubleLinkedLists.PrintReverse(flattenList.Tail);
+            Console.WriteLine($"###Calling PrintAllNodesIncludingChildren({flattenList.Head.Value}).");
             DoubleLinkedLists.PrintAllNodesIncludingChildren(flattenList.Head);
+            Console.WriteLine($"###Calling PrintAllNodesIncludingChildren2({flattenList.Head.Value}).");
+            DoubleLinkedLists.PrintAllNodesIncludingChildren2(flattenList.Head);
         }
 
     }

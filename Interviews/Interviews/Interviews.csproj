@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Linked Lists\BinaryTrees.cs" />
     <Compile Include="Linked Lists\DoubleLinkedLists.cs" />
     <Compile Include="Linked Lists\SingleLinkedLists.cs" />
+    <Compile Include="Linked Lists\StringTests.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
