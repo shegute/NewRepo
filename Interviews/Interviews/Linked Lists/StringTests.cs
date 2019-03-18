@@ -17,26 +17,44 @@ namespace Interviews.Linked_Lists.StringTests
                 if (!table.ContainsKey(c)) { table.Add(c, 1); }
                 else { int i = (int)table[c];  table[c] = ++i;   }
             }
-            //char? targetCharacter = null;
+
             foreach (DictionaryEntry item in table) {
                 Console.WriteLine($"Character:{item.Key}, count:{item.Value}");
-                //if (!targetCharacter.HasValue && (int)item.Value ==1) { targetCharacter =(char) item.Key; }
             }
 
             foreach (char c in word) { if (table.ContainsKey(c) && (int)table[c] == 1) { return c; } }
-
-            // return targetCharacter.HasValue? targetCharacter.Value: ' ';
+            
             return ' ';
         }
+        public static string ReverseString(string word)
+        {
+            string reversedString = StringTests.ReverseWord(word);
+            StringBuilder sb = new StringBuilder();
+            string[] reversedStrings = reversedString.Split(' ');
+            foreach (string s in reversedStrings) { sb.Append(ReverseWord(s)); sb.Append(' '); }
+            return sb.ToString();
+        }
 
+        public static string ReverseWord(string word)
+        {
+            char[] sourcearray = word.ToCharArray();
+            int wordLength = sourcearray.Length;
+            char[] destArray = new char[wordLength]; for (int i = 0; i < wordLength; i++)
+            {
+                destArray[i] = sourcearray[wordLength - i-1];
+            }
+            return new string(destArray);
+        }
         public static void Run()
         {
             Console.WriteLine($"");
             Console.WriteLine($"");
             Console.WriteLine($"############StringTests.Run()");
-            string word = "this his ata teest to find first word.";
+            string word = "This is a test to find first word.";
             Console.WriteLine($"############FindFirstNonRepeatedCharacter({word})");
-            Console.WriteLine(  StringTests.FindFirstNonRepeatedCharacter(word));
+            Console.WriteLine(StringTests.FindFirstNonRepeatedCharacter(word));
+            Console.WriteLine($"############FindFirstNonRepeatedCharacter({word})");
+            Console.WriteLine(StringTests.ReverseString(word));
         }
     }
 }

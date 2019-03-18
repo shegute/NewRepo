@@ -31,6 +31,7 @@ namespace Interviews.Linked_Lists.BinaryTrees
             Console.WriteLine($"End of List");
             return null;
         }
+
         public static void PrintNodesPreOrder(Node head)
         { 
             if (head == null) {   return; } 
@@ -38,6 +39,11 @@ namespace Interviews.Linked_Lists.BinaryTrees
             PrintNodesInOrder(head.Left);
             PrintNodesInOrder(head.Right);  
             return  ;
+        }
+
+        public static void Run()
+        {
+            BinaryTreePrinter.Run();
         }
 
         public class BinaryTreePrinter

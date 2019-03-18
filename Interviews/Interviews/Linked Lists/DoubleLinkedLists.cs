@@ -67,6 +67,11 @@ namespace Interviews.Linked_Lists.DoubleLinkedLists
         //    return null;
         //}
 
+        public static void Run()
+        {
+            FlattenList.Run();
+        }
+
     }
 
     public class Node
