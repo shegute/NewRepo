@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Interviews.Linked_Lists.SingleLinkedLists
+namespace Interviews.DataStructures.SingleLinkedLists
 {
     public class SingleLinkedLists
     {
@@ -19,6 +19,7 @@ namespace Interviews.Linked_Lists.SingleLinkedLists
 
         public static void Run()
         {
+            Console.WriteLine(" *(*(*(*(*(*(*(*(*(*(*(*(*(SingleLinkedLists*(*(*(*(*(*(*(*(*(*(*(*(*( ");
             StackSLL.Run();
             MaintainHeadNTail.Run();
             MthToLastElement.Run();

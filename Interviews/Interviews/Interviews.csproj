@@ -43,10 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Linked Lists\BinaryTrees.cs" />
-    <Compile Include="Linked Lists\DoubleLinkedLists.cs" />
-    <Compile Include="Linked Lists\SingleLinkedLists.cs" />
-    <Compile Include="Linked Lists\StringTests.cs" />
+    <Compile Include="Quizes\ArrayTests.cs" />
+    <Compile Include="DataStructures\BinaryTrees.cs" />
+    <Compile Include="DataStructures\DoubleLinkedLists.cs" />
+    <Compile Include="Quizes\IntegerTests.cs" />
+    <Compile Include="DataStructures\SingleLinkedLists.cs" />
+    <Compile Include="DataStructures\Sorting.cs" />
+    <Compile Include="Quizes\StringTests.cs" />
+    <Compile Include="Quizes\Quizes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

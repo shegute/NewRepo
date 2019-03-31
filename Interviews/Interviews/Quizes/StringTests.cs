@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Interviews.Linked_Lists.StringTests
+namespace Interviews.Quizes.StringTests
 {
    public class StringTests
     {
@@ -45,15 +45,17 @@ namespace Interviews.Linked_Lists.StringTests
             }
             return new string(destArray);
         }
+
         public static void Run()
         {
+            Console.WriteLine(" &*&*&*&*&*&&*&*&*&*&*&*&*&*&StringTests*&*&*&*&*&**&*&*&*&*&*&*&* ");
             Console.WriteLine($"");
             Console.WriteLine($"");
             Console.WriteLine($"############StringTests.Run()");
             string word = "This is a test to find first word.";
             Console.WriteLine($"############FindFirstNonRepeatedCharacter({word})");
             Console.WriteLine(StringTests.FindFirstNonRepeatedCharacter(word));
-            Console.WriteLine($"############FindFirstNonRepeatedCharacter({word})");
+            Console.WriteLine($"############ReverseString({word})");
             Console.WriteLine(StringTests.ReverseString(word));
         }
     }

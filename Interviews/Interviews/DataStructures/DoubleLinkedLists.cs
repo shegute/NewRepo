@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Interviews.Linked_Lists.DoubleLinkedLists
+namespace Interviews.DataStructures.DoubleLinkedLists
 {
     public class DoubleLinkedLists
     {
@@ -69,6 +69,7 @@ namespace Interviews.Linked_Lists.DoubleLinkedLists
 
         public static void Run()
         {
+            Console.WriteLine("*!*!!*!*!*!**!*!*!*!*!*!*DoubleLinkedLists*!*!!*!*!*!**!*!*!*!*!*!*");
             FlattenList.Run();
         }
 

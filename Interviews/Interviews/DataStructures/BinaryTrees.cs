@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Interviews.Linked_Lists.BinaryTrees
+namespace Interviews.DataStructures.BinaryTrees
 {
     public class BinaryTrees
     {
@@ -18,31 +14,38 @@ namespace Interviews.Linked_Lists.BinaryTrees
             { this.Value = v; this.Left = l; this.Right = r; }
         }
 
-        public static Node PrintNodesInOrder(Node head)
+        //public static Node PrintNodesInOrder(Node head)
+        public static void PrintNodesInOrder(Node head)
         {
-            int count = 0; Console.WriteLine($"Print all nodes");
-            if (head == null) { Console.WriteLine($"List is empty"); return null; }
+            //int count = 0; Console.WriteLine($"Print all nodes");
+            //if (head == null) { Console.WriteLine($"List is empty"); return null; }
 
-            Node temp = head;
-            while (temp != null) { temp = head.Left; temp = PrintNodesInOrder(temp); }
-            Console.WriteLine($"Node {count++}: {head.Value}");
-            temp = head.Right;
-            while (temp != null) { temp = head.Right; temp = PrintNodesInOrder(temp); }
-            Console.WriteLine($"End of List");
-            return null;
+            //Node temp = head;
+            //while (temp != null) { temp = head.Left; temp = PrintNodesInOrder(temp); }
+            //Console.WriteLine($"Node {count++}: {head.Value}");
+            //temp = head.Right;
+            //while (temp != null) { temp = head.Right; temp = PrintNodesInOrder(temp); }
+            //Console.WriteLine($"End of List");
+            //return null;
+            if (head == null) { return; }
+            PrintNodesInOrder(head.Left);
+            Console.WriteLine($"Node:{head.Value}");
+            PrintNodesInOrder(head.Right);
+
         }
 
         public static void PrintNodesPreOrder(Node head)
         { 
             if (head == null) {   return; } 
             Console.WriteLine($"Node:{head.Value}");
-            PrintNodesInOrder(head.Left);
-            PrintNodesInOrder(head.Right);  
+            PrintNodesPreOrder(head.Left);
+            PrintNodesPreOrder(head.Right);  
             return  ;
         }
 
         public static void Run()
         {
+            Console.WriteLine(" #*#*#**#*#*#*#*#*#**##**#BinaryTrees#*#*#**#*#*#*#*#*#**##**# ");
             BinaryTreePrinter.Run();
         }
 
