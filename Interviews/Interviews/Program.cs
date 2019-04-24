@@ -2,11 +2,12 @@
 using Interviews.DataStructures.DoubleLinkedLists;
 using Interviews.DataStructures.SingleLinkedLists;
 using Interviews.DataStructures.SortingTests;
-using Interviews.Quizes;
+using Interviews.Quizes.Randos;
 using Interviews.Quizes.ArrayTests;
 using Interviews.Quizes.IntegerTests;
 using Interviews.Quizes.StringTests;
 using System;
+using Interviews.DataStructures.Graphs;
 
 namespace Interviews
 {
@@ -29,9 +30,10 @@ namespace Interviews
                 else if (num == 3) { BinaryTrees.Run(); }
                 else if (num == 4) { StringTests.Run(); }
                 else if (num == 5) { Sorting.Run(); }
-                else if (num == 6) { CellCompete.Run(); } // Any other class from Misc Quizes folder.Run();
+                else if (num == 6) { Interviews.Quizes.Randos.Quizes.Run(); } // Any other class from Misc Quizes folder.Run();
                 else if (num == 7) { ArrayTests.Run(); }
                 else if (num == 8) { IntegerTests.Run(); }
+                else if (num == 9) { Graphs.Run(); }
                 else if (num == 0) { System.Environment.Exit(0); }
                 test = false;
             }
@@ -48,6 +50,7 @@ namespace Interviews
             Console.WriteLine("6 for Misc Quizes.");
             Console.WriteLine("7 for arrays.");
             Console.WriteLine("8 for integer.");
+            Console.WriteLine("9 for graphs.");
             Console.WriteLine("0 to exit.");
         }
     }

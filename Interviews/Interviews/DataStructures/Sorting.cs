@@ -41,13 +41,18 @@ namespace Interviews.DataStructures.SortingTests
             Console.WriteLine($"Calling SelectionSort() on array:");
             sortingProblems.Print(sortingProblems.SelectionSort(sortingProblems.numbers));
             Console.WriteLine($"Unsorted array:");
+            sortingProblems.numbers= new int[] { 6, 1, 7, 8, 9, 3, 5, 4, 2 };
             sortingProblems.Print(sortingProblems.numbers);
             Console.WriteLine($"Calling MergeSort() on array:");
             sortingProblems.Print(sortingProblems.MergeSort(sortingProblems.numbers));
             Console.WriteLine($"Unsorted array:");
+            sortingProblems.numbers = new int[] { 6, 1, 7, 8, 9, 3, 5, 4, 2 };
             sortingProblems.Print(sortingProblems.numbers);
             Console.WriteLine($"Calling BubbleSort() on array:");
             sortingProblems.Print(sortingProblems.BubbleSort(sortingProblems.numbers));
+            Console.WriteLine($"Calling QuickSort() on array:");
+            sortingProblems.numbers = new int[] { 6, 1, 7, 8, 9, 3, 5, 4, 2 };
+            sortingProblems.Print(sortingProblems.QuickSort(sortingProblems.numbers));
 
         }
 
@@ -121,7 +126,11 @@ namespace Interviews.DataStructures.SortingTests
             return localNumbers;
         }
 
-        public int[] QuickSort(int[] unsorted, int low, int high)
+        public int[] QuickSort(int[] unsorted)
+        {
+            return this.QuickSort(unsorted, 0, unsorted.Length-1);
+        }
+        private  int[] QuickSort(int[] unsorted, int low, int high)
         {
             int[] localNumbers = unsorted; int pi;
             if (low < high)
@@ -134,13 +143,19 @@ namespace Interviews.DataStructures.SortingTests
                 QuickSort(localNumbers, pi + 1, high); // After pi
             }
 
-
             return localNumbers;
         }
-
         private int partition(int[] localNumbers, int low, int high)
         {
-            throw new NotImplementedException();
+            int pi = localNumbers[high];
+            int j = low - 1;
+            for (int i = low; i < high; i++)
+            {
+                if (localNumbers[i] <= pi)
+                { j++; this.Swap(localNumbers, j, i); }
+            }  
+            this.Swap(localNumbers, j+1, high);
+            return j + 1;
         }
     }
 }
