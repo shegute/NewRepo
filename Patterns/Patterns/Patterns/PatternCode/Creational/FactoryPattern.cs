@@ -34,6 +34,7 @@ namespace Patterns
         private List<Wheel> wheels = new List<Wheel>();
         public Vehicle()
         { this.CreateWheels(); }
+
         public List<Wheel> Wheel { get { return wheels; } }
         public void DisplayWheels()
         {
@@ -50,7 +51,7 @@ namespace Patterns
             //Wheel.Add(new BikeWheel("1Bikewheel"));
             //Wheel.Add(new BikeWheel("2Bikewheel"));
             Wheel.Add(new FrontWheel("FrontBikeWheel"));
-            Wheel.Add(new BackWheel("BackBikeWheel"));
+            Wheel.Add(new BackWheel("RearBikeWheel"));
         }
     }
 
@@ -61,11 +62,11 @@ namespace Patterns
             //for (int i = 1; i < 5; i++)
             //{ Wheel.Add(new CarWheel(i.ToString() + "Carwheel")); }
 
-            for (int i = 1; i < 2; i++)
+            for (int i = 1; i <= 2; i++)
             { Wheel.Add(new FrontWheel(i.ToString() + "FrontCarwheel")); }
 
-            for (int i = 1; i < 2; i++)
-            { Wheel.Add(new BackWheel(i.ToString() + "BackCarwheel")); }
+            for (int i = 1; i <= 2; i++)
+            { Wheel.Add(new BackWheel(i.ToString() + "RearCarwheel")); }
         }
     }
 
@@ -76,11 +77,11 @@ namespace Patterns
             //for (int i = 1; i < 11; i++)
             //{ Wheel.Add(new TruckWheel(i.ToString() + "Truckwheel")); }
 
-            for (int i = 1; i < 6; i++)
-            { Wheel.Add(new FrontWheel(i.ToString() + "FrontCarwheel")); }
+            for (int i = 1; i <= 4; i++)
+            { Wheel.Add(new FrontWheel(i.ToString() + "FrontTruckwheel")); }
 
-            for (int i = 1; i < 12; i++)
-            { Wheel.Add(new BackWheel(i.ToString() + "BackCarwheel")); }
+            for (int i = 1; i <= 8; i++)
+            { Wheel.Add(new BackWheel(i.ToString() + "RearTruckCarwheel")); }
         }
     }
 }

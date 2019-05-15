@@ -1,4 +1,5 @@
-﻿using Patterns.ExamCode.Exam70_483;
+﻿using Patterns;
+using Patterns.ExamCode.Exam70_483;
 using Patterns.RandomCode;
 
 namespace DoFactory.GangOfFour
@@ -36,7 +37,7 @@ namespace DoFactory.GangOfFour
             //TemplatePatternMainApp.Run();
             //MediatorPatternMainApp.Run();
             //PrototypePattern.Run();
-            //FactoryPattern.Run();
+            FactoryPattern.Run();
             //StrategyPattern2.Run();
             //VisitorPatternMainApp.Run();
             //AdapterPattern.Run();
