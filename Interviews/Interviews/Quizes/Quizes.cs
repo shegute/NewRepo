@@ -29,8 +29,8 @@ namespace Interviews.Quizes.Randos
             quizes.PrintBoardPositions(quizes.QueensAttack2(boardSize, numberOfObstacles, queenRow, queenColumn, obstaclesArray));
             Console.WriteLine($"Result of call to QueensAttack2(boardsize:{boardSize}, queenrow:{queenRow}, queenColumn:{queenColumn})");
 
-              boardSize = 7;   numberOfObstacles = 5;   queenRow = 4;   queenColumn = 3;
-              obstaclesArray = new int[6][] {
+            boardSize = 7; numberOfObstacles = 5; queenRow = 4; queenColumn = 3;
+            obstaclesArray = new int[6][] {
                   new int[] { 2, 1 }, new int[] { 4, 2 },
                   new int[] { 5, 2 }, new int[] { 5, 4 },
               new int[] { 2, 5 }, new int[] { 6, 5 } };
@@ -44,6 +44,11 @@ namespace Interviews.Quizes.Randos
             //quizes.PrintBoardPositions(quizes.QueensAttack(boardSize, numberOfObstacles, queenRow, queenColumn, obstaclesArray));
 
             Console.WriteLine($"Result of call to minimumTime({quizes.minimumTime(4, new int[] { 1, 2, 5, 10, 35, 89 })})");
+
+            Console.WriteLine($"Result of call to find phone bill");
+            string s = "00:01:07,400-234-090@00:05:07,400-234-091@00:01:07,400-234-092@00:10:07,400-234-090@00:10:07,400-234-093";
+            s = s.Replace("@", "@" + System.Environment.NewLine);
+            Console.WriteLine(quizes.CellPhoneBill(s));
         }
 
         public void Print(int[] n)
@@ -437,7 +442,7 @@ namespace Interviews.Quizes.Randos
                     sumOfAttackableSpotsVertical++;
                     attackableSpots1.Add(new Tuple<int, int>(i, queenColumn));
                 }
-                else  { break; }
+                else { break; }
             }
 
             //Calculate Horizonatal attackable spots
@@ -481,7 +486,7 @@ namespace Interviews.Quizes.Randos
                     sumOfAttackableSpotsRightToLeftDiagonal++;
                     attackableSpots3.Add(new Tuple<int, int>(i, j));
                 }
-                else  { break; }
+                else { break; }
             }
 
             //Calculate LeftToRight attackable spots
@@ -505,7 +510,7 @@ namespace Interviews.Quizes.Randos
                 }
                 else { break; }
             }
-            
+
             attackableSpots.AddRange(attackableSpots1);
             attackableSpots.AddRange(attackableSpots2);
             attackableSpots.AddRange(attackableSpots3);
@@ -559,6 +564,81 @@ namespace Interviews.Quizes.Randos
             //Then sum up
 
             // WRITE YOUR CODE HERE
+        }
+
+
+        //BlueWater Consulting group. Calculate phone bill. less than 5 mins>> 3 cents per sec. 5Mins and above>> 150 per minute. Most called phone, free.
+        public int CellPhoneBill(string s)
+        {
+            string[] rawCalls = s.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            List<CallDetails> callDetails = new List<CallDetails>();
+            foreach (string call in rawCalls)
+            {
+                string[] rawCallDetail = call.Split(','); 
+                TimeSpan callDuration;
+                if (TimeSpan.TryParse(rawCallDetail[0], out callDuration))
+                {
+                    callDetails.Add(new CallDetails(callDuration, rawCallDetail[1]));
+                }
+            }
+
+            string freeCallPhoneNumber = this.FindFreeCallPhoneNumber(callDetails);
+
+
+            int totalCallExpense = 0;
+            foreach (CallDetails callDetail in callDetails)
+            {
+                if (!callDetail.phoneNumber.Equals(freeCallPhoneNumber))
+                {
+                    totalCallExpense += this.CalculateCallBilling(callDetail.callDuration);
+                }
+            }
+
+            return totalCallExpense;
+        }
+
+        public int CalculateCallBilling(TimeSpan callDuration)
+        {
+            int callExpense = 0;
+
+            if (callDuration.TotalMinutes >= 5) { callExpense += (int)callDuration.TotalMinutes * 150; if (callDuration.Seconds > 0) { callExpense += 150; } }
+            else { callExpense += (int)callDuration.TotalSeconds * 3; }
+
+            return callExpense;
+
+        }
+
+        public string FindFreeCallPhoneNumber(List<CallDetails> calls)
+        {
+            string freeCallNumber = string.Empty;
+            Dictionary<string, TimeSpan> callDetails = new Dictionary<string, TimeSpan>();
+            foreach (CallDetails call in calls)
+            {
+                if (callDetails.ContainsKey(call.phoneNumber))
+                { callDetails[call.phoneNumber] = callDetails[call.phoneNumber] + call.callDuration; }
+                else
+                { callDetails.Add(call.phoneNumber, call.callDuration); }
+
+
+                TimeSpan maxDuration = new TimeSpan(0);
+                foreach (KeyValuePair<string, TimeSpan> kvp in callDetails)
+                {
+                    if (kvp.Value > maxDuration) { maxDuration = kvp.Value; freeCallNumber = kvp.Key; }
+                }
+            }
+
+            return freeCallNumber;
+        }
+    }
+
+    public class CallDetails
+    {
+        public TimeSpan callDuration;
+        public string phoneNumber;
+        public CallDetails(TimeSpan duration, string number)
+        {
+            this.callDuration = duration;
+            this.phoneNumber = number;
         }
     }
 }
