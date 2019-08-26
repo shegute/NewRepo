@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Interviews.Quizes.Randos
 {
@@ -49,6 +50,13 @@ namespace Interviews.Quizes.Randos
             string s = "00:01:07,400-234-090@00:05:07,400-234-091@00:01:07,400-234-092@00:10:07,400-234-090@00:10:07,400-234-093";
             s = s.Replace("@", "@" + System.Environment.NewLine);
             Console.WriteLine(quizes.CellPhoneBill(s));
+
+            Console.WriteLine($"Result of call to PowersOf2");
+            PowersOf2.Run();
+            Console.WriteLine($"Result of call to ShowGalaxies");
+            GalaxyClass.ShowGalaxies();
+            Console.WriteLine($"Result of call to StackOfPlates");
+            StackOfPlatesClass.Run();
         }
 
         public void Print(int[] n)
@@ -641,5 +649,313 @@ namespace Interviews.Quizes.Randos
             this.phoneNumber = number;
         }
     }
+
+    #region StackOfPlates
+    public static class StackOfPlatesClass
+    {
+        public static void Run()
+        {
+            StackOfPlates stack = new StackOfPlates();
+            stack.AddPlates(1);
+            stack.AddPlates(3);
+            stack.AddPlates(5);
+            stack.AddPlates(7);
+            stack.AddPlates(4);
+
+            //stack.Print("original Stack");
+            StackOfPlates newStack = stack.Split(2);
+            newStack.Print("New Stack");
+            stack.Print("Old Stack");
+        }
+    }
+
+    public class StackOfPlates
+    {
+        Stack<int> plates;
+
+        public StackOfPlates()
+        {
+            plates = new Stack<int>();
+        }
+
+        public void AddPlates(int p)
+        {
+            List<int> tempPlates = new List<int>();
+            while (plates.Count > 0 && plates.Peek() > p)
+            {
+                tempPlates.Add(plates.Pop());
+            }
+
+            plates.Push(p);
+            for (int i = 0; i < tempPlates.Count; i++)
+            {
+                plates.Push(tempPlates[tempPlates.Count - 1 - i]);
+            }
+
+        }
+
+        public StackOfPlates Split(int stackSize)
+        {
+            StackOfPlates newPlates = new StackOfPlates();
+
+            if (stackSize > plates.Count)
+            {
+                return newPlates;
+            }
+
+            int reminingPlatesCountSize = plates.Count - stackSize;
+            int[] tempPlates = new int[reminingPlatesCountSize];
+            int[] tempPlates2 = new int[stackSize];
+            for (int i = 0; i < reminingPlatesCountSize; i++)
+            {
+                tempPlates[i] = plates.Pop();
+            }
+            Array.Reverse(tempPlates);
+
+            for (int i = 0; i < stackSize; i++)
+            {
+                tempPlates2[i] = plates.Pop();
+            }
+            Array.Reverse(tempPlates2);
+
+
+            foreach (int p in tempPlates2)
+            {
+                newPlates.AddPlates(p);
+            }
+            foreach (int p in tempPlates)
+            {
+                plates.Push(p);
+            }
+            return newPlates;
+        }
+
+
+
+        public void Print(string name)
+        {
+            Console.WriteLine($"##########PRINT PLATES:{name} ################");
+            Stack<int> tempPlates = plates;
+            while (tempPlates.Count > 0)
+            {
+                Console.WriteLine(tempPlates.Pop());
+            }
+        }
+
+    }
+    #endregion StackOfPlates
+
+    # region PowersOf2
+    public class PowersOf2
+    {
+        public static void Run()
+        {
+            // Display powers of 2 up to the exponent of 8:
+            foreach (int i in Power(2, 8))
+            {
+                Console.Write("{0} ", i);
+                System.Threading.Thread.Sleep(1000);
+            }
+        }
+
+        public static System.Collections.Generic.IEnumerable<int> Power(int number, int exponent)
+        {
+            int result = 1;
+
+            for (int i = 0; i < exponent; i++)
+            {
+                result = result * number;
+                yield return result;
+                //return new List<int> { result };
+            }
+            // return new List<int> { 1 };
+        }
+
+        // Output: 2 4 8 16 32 64 128 256
+    }
+    #endregion PowersOf2
+
+    #region Galaxies
+    public static class GalaxyClass
+    {
+        public static void ShowGalaxies()
+        {
+            var theGalaxies = new Galaxies();
+            Stopwatch s = new Stopwatch();
+            s.Start();
+            foreach (Galaxy theGalaxy in theGalaxies.NextGalaxy)
+            {
+                Console.WriteLine(theGalaxy.Name + " " + theGalaxy.MegaLightYears.ToString());
+            }
+            s.Stop();
+            Console.WriteLine(s.Elapsed);
+            Stopwatch s2 = new Stopwatch();
+            s2.Start();
+            foreach (Galaxy theGalaxy in theGalaxies.NextGalaxy2)
+            {
+                Console.WriteLine(theGalaxy.Name + " " + theGalaxy.MegaLightYears.ToString());
+            }
+            s2.Stop();
+            Console.WriteLine(s2.Elapsed);
+        }
+
+        public class Galaxies
+        {
+
+            public System.Collections.Generic.IEnumerable<Galaxy> NextGalaxy
+            {
+                get
+                {
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                    yield return new Galaxy { Name = "Tadpole", MegaLightYears = 400 };
+                    yield return new Galaxy { Name = "Pinwheel", MegaLightYears = 25 };
+                    yield return new Galaxy { Name = "Milky Way", MegaLightYears = 0 };
+                    yield return new Galaxy { Name = "Andromeda", MegaLightYears = 3 };
+                }
+            }
+            public System.Collections.Generic.IEnumerable<Galaxy> NextGalaxy2
+            {
+                get
+                {
+                    IEnumerable<Galaxy> galaxies = new List<Galaxy> {
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 },
+                    new Galaxy { Name = "Tadpole", MegaLightYears = 400 },
+                    new Galaxy { Name = "Pinwheel", MegaLightYears = 25 },
+                     new Galaxy { Name = "Milky Way", MegaLightYears = 0 },
+                     new Galaxy { Name = "Andromeda", MegaLightYears = 3 }
+                    };
+                    return galaxies;
+                }
+            }
+
+        }
+
+        public class Galaxy
+        {
+            public String Name { get; set; }
+            public int MegaLightYears { get; set; }
+        }
+    }
+    #endregion Galaxies
+
+
 }
 
