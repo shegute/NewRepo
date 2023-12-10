@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Interviews.DataStructures.SingleLinkedLists
 {
+    public class Node
+    {
+        public string Value { get; set; }
+        public Node Next { get; set; }
+        public Node(string v, Node n)
+        { this.Value = v; this.Next = n; }
+    }
     public class SingleLinkedLists
     {
+
         public static void Print(Node head)
         {
             int count = 0; Node temp = head; Console.WriteLine($"Print all nodes");
-            while (temp != null) { Console.WriteLine($"Node {count++}: {temp.Value}"); temp = temp.Next; }
+            while (temp != null && count<1000) { Console.WriteLine($"Node {count++}: {temp.Value}"); temp = temp.Next; }
             Console.WriteLine($"List is empty");
         }
         public static void PrintNode(Node printNode)
@@ -28,15 +33,9 @@ namespace Interviews.DataStructures.SingleLinkedLists
             CheckIfPalindrome.Run();
             RotateList.Run();
             ReverseList.Run();
+            RotateListTwo.Run();
+            CheckIfLoop.Run();
         }
-    }
-
-    public class Node
-    {
-        public string Value { get; set; }
-        public Node Next { get; set; }
-        public Node(string v, Node n)
-        { this.Value = v; this.Next = n; }
     }
 
     public class StackSLL
@@ -84,50 +83,50 @@ namespace Interviews.DataStructures.SingleLinkedLists
         public Node Tail { get; set; }
         public MaintainHeadNTail(Node head) { this.Head = head; this.Tail = head; }
 
-        public bool InsertAfter(Node markerNode, Node newNode)
+        public bool InsertAfter(string markerNodeValue, Node newNode)
         {
             Node cur = this.Head;
             while (cur != null)
             {
-                if (cur.Value == markerNode.Value)
+                if (cur.Value == markerNodeValue)
                 {
                     newNode.Next = cur.Next; cur.Next = newNode;
                     if (cur.Value == this.Tail.Value) { this.Tail = newNode; }
                     //if (null == this.Tail) { this.Tail = newNode; }
                     //if (null == this.Head) { this.Head = newNode; }
 
-                    Console.WriteLine($"###INFO:InsertAfter({markerNode.Value}, {newNode.Value}) Succeded.");
+                    Console.WriteLine($"###INFO:InsertAfter({markerNodeValue}, {newNode.Value}) Succeded.");
                     return true;
                 }
                 cur = cur.Next;
             }
 
-            Console.WriteLine($"###INFO:InsertAfter({markerNode.Value}, {newNode.Value}) Failed.");
+            Console.WriteLine($"###INFO:InsertAfter({markerNodeValue}, {newNode.Value}) Failed.");
             return false;
         }
-        public bool Remove(Node markerNode)
+        public bool Remove(string markerNodeValue)
         {
             Node cur = this.Head; Node cur2 = this.Head;
-            if (cur.Value == markerNode.Value)
+            if (cur.Value == markerNodeValue)
             {
                 this.Head = this.Head.Next; if (cur.Value == this.Tail.Value) { this.Tail = null; }
-                Console.WriteLine($"###INFO:Remove({markerNode.Value}) Succeded.");
+                Console.WriteLine($"###INFO:Remove({markerNodeValue}) Succeded.");
                 return true;
             }
             while (cur != null)
             {
                 cur = cur.Next;
-                if (cur.Value == markerNode.Value)
+                if (cur.Value == markerNodeValue)
                 {
                     cur2.Next = cur.Next; if (cur.Value == this.Tail.Value) { this.Tail = cur2; }
 
-                    Console.WriteLine($"###INFO:Remove({markerNode.Value}) Succeded.");
+                    Console.WriteLine($"###INFO:Remove({markerNodeValue}) Succeded.");
                     return true;
                 }
                 cur2 = cur2.Next;
             }
 
-            Console.WriteLine($"###INFO:Remove({markerNode.Value}) Failed.");
+            Console.WriteLine($"###INFO:Remove({markerNodeValue}) Failed.");
             return false;
         }
 
@@ -140,24 +139,24 @@ namespace Interviews.DataStructures.SingleLinkedLists
             SingleLinkedLists.PrintNode(m.Head);
             SingleLinkedLists.PrintNode(m.Tail);
             SingleLinkedLists.Print(m.Head);
-            m.InsertAfter(new Node("A", null), new Node("B", null));
+            m.InsertAfter("A", new Node("B", null));
             SingleLinkedLists.PrintNode(m.Head);
             SingleLinkedLists.PrintNode(m.Tail);
             SingleLinkedLists.Print(m.Head);
-            m.InsertAfter(new Node("A", null), new Node("C", null));
+            m.InsertAfter("A", new Node("C", null));
             SingleLinkedLists.PrintNode(m.Head);
             SingleLinkedLists.PrintNode(m.Tail);
             SingleLinkedLists.Print(m.Head);
 
-            m.Remove(new Node("A", null));
+            m.Remove("A");
             SingleLinkedLists.PrintNode(m.Head);
             SingleLinkedLists.PrintNode(m.Tail);
             SingleLinkedLists.Print(m.Head);
-            m.Remove(new Node("B", null));
+            m.Remove("B");
             SingleLinkedLists.PrintNode(m.Head);
             SingleLinkedLists.PrintNode(m.Tail);
             SingleLinkedLists.Print(m.Head);
-            m.Remove(new Node("C", null));
+            m.Remove("C");
             SingleLinkedLists.PrintNode(m.Head);
             SingleLinkedLists.PrintNode(m.Tail);
             SingleLinkedLists.Print(m.Head);
@@ -175,16 +174,18 @@ namespace Interviews.DataStructures.SingleLinkedLists
         {
             Node curNode = this.Head;
             Node curNode2 = this.Head;
-            int count = 0;
+            int count = 1;
+            if (m == count)
+            {
+                return curNode;
+            }
             while (m > count++ && curNode != null)
             {
                 curNode = curNode.Next;
                 if (m == count)
                 {
-                    return curNode2;
+                    return curNode;
                 }
-
-                curNode2 = curNode2.Next;
             }
 
             Console.WriteLine($"{m} node not found, since list was only {count} nodes long");
@@ -241,7 +242,7 @@ namespace Interviews.DataStructures.SingleLinkedLists
             PrintMiddleElement printMiddleElement = new PrintMiddleElement(head);
             Console.WriteLine($"###Calling PrintMiddleNode().");
             printMiddleElement.PrintMiddleNode();
-            head = new Node("F", new Node("G", null));
+            head = new Node("F", new Node("G", new Node("h", null)));
             printMiddleElement = new PrintMiddleElement(head);
             Console.WriteLine($"###Calling PrintMiddleNode().");
             printMiddleElement.PrintMiddleNode();
@@ -328,6 +329,27 @@ namespace Interviews.DataStructures.SingleLinkedLists
             //else if (curNode2 != null) { Console.WriteLine($"Not all ending nodes visited"); return false; }
             Console.WriteLine($"This list is a palindrome."); return true;
         }
+        public bool isPali()
+        {
+            Node cur = this.Head;
+            Node cur2 = this.Head;
+            Stack<string> stk = new Stack<string>();
+            while (cur != null && cur.Next != null)
+            {
+                stk.Push(cur2.Value);
+                cur2 = cur2.Next;
+                cur = cur.Next;
+                cur = cur.Next;
+            }
+            if (stk.Count % 2 == 0) { cur2 = cur2.Next; }
+            while (cur2 != null)
+            {
+                if (stk.Pop() != cur2.Value) { return false; }
+                cur2 = cur2.Next;
+            }
+
+            return true;
+        }
 
 
         public static void Run()
@@ -356,10 +378,24 @@ namespace Interviews.DataStructures.SingleLinkedLists
             Console.WriteLine($"###Calling Print().");
             SingleLinkedLists.Print(checkIfPalindrome.Head);
 
-            head = new Node("c", new Node("i", new Node("v", new Node("i", new Node("c", null)))));
+            head = new Node("c", new Node("i", new Node("v", new Node("v", new Node("i", new Node("c", null))))));
             checkIfPalindrome = new CheckIfPalindrome(head);
             Console.WriteLine($"###Calling IsPalindrome(civic).");
-            Console.WriteLine($"{checkIfPalindrome.IsPalindrome()}");
+            Console.WriteLine($"{checkIfPalindrome.isPali()}");
+            Console.WriteLine($"###Calling Print().");
+            SingleLinkedLists.Print(checkIfPalindrome.Head);
+
+            head = new Node("c", new Node("i", new Node("v", new Node("i", new Node("c", null)))));
+            checkIfPalindrome = new CheckIfPalindrome(head);
+            Console.WriteLine($"###Calling isPali(civic).");
+            Console.WriteLine($"{checkIfPalindrome.isPali()}");
+            Console.WriteLine($"###Calling Print().");
+            SingleLinkedLists.Print(checkIfPalindrome.Head);
+
+            head = new Node("c", new Node("i", new Node("v", new Node("v", new Node("i", new Node("c", null))))));
+            checkIfPalindrome = new CheckIfPalindrome(head);
+            Console.WriteLine($"###Calling isPali(civvic).");
+            Console.WriteLine($"{checkIfPalindrome.isPali()}");
             Console.WriteLine($"###Calling Print().");
             SingleLinkedLists.Print(checkIfPalindrome.Head);
 
@@ -390,6 +426,64 @@ namespace Interviews.DataStructures.SingleLinkedLists
             Console.WriteLine($"{checkIfPalindrome.IsPalindrome()}");
             Console.WriteLine($"###Calling Print().");
             SingleLinkedLists.Print(checkIfPalindrome.Head);
+        }
+    }
+
+
+    public class CheckIfLoop
+    {
+        public Node Head;
+        public CheckIfLoop(Node h) { this.Head = h; }
+
+        public Node createLoop(Node h)
+        {
+            Node cur = h;
+            Node temp;
+            while (cur.Next != null)
+            {
+                cur = cur.Next;
+            }
+            cur.Next = h.Next; //Create loop from tail to the 2nd node from head.
+            return h;
+        }
+
+        public bool detectLoop()
+        {
+            Node cur = this.Head; Node trailer = this.Head;
+            while (cur != null && cur.Next != null)
+            {
+                cur = cur.Next;
+                if (cur == trailer || cur.Next == trailer) { return true; }
+                trailer = trailer.Next;
+                cur = cur.Next;
+            }
+            return false;
+        }
+
+
+        public static void Run()
+        {
+            Console.WriteLine($"");
+            Console.WriteLine($"");
+            Console.WriteLine($"###CheckIfLooop.RUN().");
+            Node head = new Node("a", new Node("c", new Node("c", new Node("t", new Node("o", new Node("r", null))))));
+            CheckIfLoop checkIfLoop = new CheckIfLoop(head);
+            Console.WriteLine($"###Calling CheckIfLooop(acctor).");
+            Console.WriteLine($"{checkIfLoop.detectLoop()}");
+            Console.WriteLine($"###Calling Print().");
+            SingleLinkedLists.Print(checkIfLoop.Head);
+
+            Node node1 = new Node("AA", null);
+            Node node2 = new Node("B", node1);
+            Node node3 = new Node("C", node2);
+            Node head2 = new Node("A", node3);
+            node1.Next = head2.Next;
+            checkIfLoop = new CheckIfLoop(head2);
+            //checkIfLoop.Head = checkIfLoop.createLoop(checkIfLoop.Head);
+            Console.WriteLine($"###Calling checkIfLoop(AA,E,D,C,B,A,D).");
+            Console.WriteLine($"{checkIfLoop.detectLoop()}");
+            Console.WriteLine($"###Calling Print().");
+            SingleLinkedLists.Print(checkIfLoop.Head);
         }
     }
 
@@ -508,6 +602,67 @@ namespace Interviews.DataStructures.SingleLinkedLists
             rotateList = new ReverseList(head);
             Console.WriteLine($"###Calling ReverseNodes()."); rotateList.ReverseNodes();
             Console.WriteLine($"###Calling Print()."); SingleLinkedLists.Print(rotateList.Head);
+        }
+    }
+
+
+    public class RotateListTwo
+    {
+        public Node Head;
+        public RotateListTwo(Node h) { this.Head = h; }
+
+        public Node rotate(Node head, int k)
+        {
+            Node currentHead = head;
+
+            //First make node at k head and break previous pointer to it
+            int count = 0;
+            while (count < k && currentHead.Next != null)
+            {
+                currentHead = currentHead.Next; count++;
+                if (count + 1 == k) { }
+            }
+
+            //Then break previous pointer to currentHead 
+            Node currentTail = head;
+            count = 0;
+            while (count < k && currentHead.Next != null)
+            {
+                currentTail = currentTail.Next;
+                count++;
+                if (count + 1 == k) { currentTail.Next = null; break; }
+            }
+
+            //Then point old tail to old head 
+            Node oldTail = currentHead;
+            while (oldTail.Next != null)
+            {
+                oldTail = oldTail.Next;
+            }
+            oldTail.Next = head;
+            this.Head = currentHead;
+            return currentHead;
+        }
+
+        public static void Run()
+        {
+            Console.WriteLine($"");
+            Console.WriteLine($"");
+            Console.WriteLine($"###RotateListTwo.RUN().");
+            Node head = new Node("a", new Node("c", new Node("t", new Node("o", new Node("r", null)))));
+            RotateListTwo rotateList = new RotateListTwo(head);
+            Console.WriteLine($"###Calling RotateListTwo()."); rotateList.rotate(head, 3);
+            Console.WriteLine($"###Calling Print()."); SingleLinkedLists.Print(rotateList.Head);
+
+            //head = new Node("a", new Node("c", null));
+            //rotateList = new RotateListTwo(head);
+            //Console.WriteLine($"###Calling ReverseNodes()."); rotateList.rotate(head, 1);
+            //Console.WriteLine($"###Calling Print()."); SingleLinkedLists.Print(rotateList.Head);
+
+            //head = new Node("a", null);
+            //rotateList = new RotateListTwo(head);
+            //Console.WriteLine($"###Calling ReverseNodes()."); rotateList.rotate(head, 1);
+            //Console.WriteLine($"###Calling Print()."); SingleLinkedLists.Print(rotateList.Head);
         }
     }
 }

@@ -8,6 +8,7 @@ using Interviews.Quizes.IntegerTests;
 using Interviews.Quizes.StringTests;
 using System;
 using Interviews.DataStructures.Graphs;
+using Interviews.Quizes;
 
 namespace Interviews
 {
@@ -34,6 +35,7 @@ namespace Interviews
                 else if (num == 7) { ArrayTests.Run(); }
                 else if (num == 8) { IntegerTests.Run(); }
                 else if (num == 9) { Graphs.Run(); }
+                else if (num == 10) { Quiz2.Run(); }
                 else if (num == 0) { System.Environment.Exit(0); }
                 test = false;
             }
@@ -51,6 +53,7 @@ namespace Interviews
             Console.WriteLine("7 for arrays.");
             Console.WriteLine("8 for integer.");
             Console.WriteLine("9 for graphs.");
+            Console.WriteLine("10 for Misc Quiz2.");
             Console.WriteLine("0 to exit.");
         }
     }

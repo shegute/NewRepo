@@ -57,6 +57,10 @@ namespace Interviews.Quizes.Randos
             GalaxyClass.ShowGalaxies();
             Console.WriteLine($"Result of call to StackOfPlates");
             StackOfPlatesClass.Run();
+            Console.WriteLine($"Result of call to ValidParantheses");
+            Console.WriteLine($"Result for '()-+()[]' {ValidParantheses.IsValid("(){}()[]")}");
+            Console.WriteLine($"Result for '(-()[]+)' {ValidParantheses.IsValid("({()[]})")}");
+            Console.WriteLine($"Result for '(])' {ValidParantheses.IsValid("(])")}");
         }
 
         public void Print(int[] n)
@@ -582,7 +586,7 @@ namespace Interviews.Quizes.Randos
             List<CallDetails> callDetails = new List<CallDetails>();
             foreach (string call in rawCalls)
             {
-                string[] rawCallDetail = call.Split(','); 
+                string[] rawCallDetail = call.Split(',');
                 TimeSpan callDuration;
                 if (TimeSpan.TryParse(rawCallDetail[0], out callDuration))
                 {
@@ -637,6 +641,9 @@ namespace Interviews.Quizes.Randos
 
             return freeCallNumber;
         }
+
+
+
     }
 
     public class CallDetails
@@ -955,6 +962,33 @@ namespace Interviews.Quizes.Randos
         }
     }
     #endregion Galaxies
+
+    #region ValidParantheses
+    public class ValidParantheses
+    {
+        public static bool IsValid(string s)
+        {
+            bool valid = true;
+            List<char> openingList = new List<char>();
+            foreach (char c in s)
+            {
+                if (c == '(' || c == '[' || c == '{')
+                {
+                    Console.WriteLine($"Opening char found: {c}");
+                    openingList.Add(c);
+                }
+                else
+                {
+                    if (c == ')' && openingList[openingList.Count - 1] != '(') { return false; }
+                    else if (c == ']' && openingList[openingList.Count - 1] != '[') { return false; }
+                    else if (c == '}' && openingList[openingList.Count - 1] != '{') { return false; }
+                    else { openingList.RemoveAt(openingList.Count - 1); }
+                }
+            }
+            return valid;
+        }
+    }
+    #endregion ValidParantheses
 
 
 }

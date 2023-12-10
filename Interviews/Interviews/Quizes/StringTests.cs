@@ -39,7 +39,8 @@ namespace Interviews.Quizes.StringTests
         {
             char[] sourcearray = word.ToCharArray();
             int wordLength = sourcearray.Length;
-            char[] destArray = new char[wordLength]; for (int i = 0; i < wordLength; i++)
+            char[] destArray = new char[wordLength];
+            for (int i = 0; i < wordLength; i++)
             {
                 destArray[i] = sourcearray[wordLength - i-1];
             }

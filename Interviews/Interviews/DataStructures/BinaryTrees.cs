@@ -35,12 +35,24 @@ namespace Interviews.DataStructures.BinaryTrees
         }
 
         public static void PrintNodesPreOrder(Node head)
-        { 
-            if (head == null) {   return; } 
+        {
+            if (head == null) { return; }
             Console.WriteLine($"Node:{head.Value}");
             PrintNodesPreOrder(head.Left);
-            PrintNodesPreOrder(head.Right);  
-            return  ;
+            PrintNodesPreOrder(head.Right);
+            return;
+        }
+
+        public static int GetTreeHeight(Node head, int h)
+        {
+            int height = h;
+            if (head == null) { return height; }
+            height++;
+            Console.WriteLine($"Node:{head.Value}");
+            int leftHeight = GetTreeHeight(head.Left, height);
+            int rightHeight = GetTreeHeight(head.Right,height);
+            height = leftHeight > rightHeight ? leftHeight : rightHeight;
+            return height;
         }
 
         public static void Run()
@@ -60,10 +72,12 @@ namespace Interviews.DataStructures.BinaryTrees
                 Console.WriteLine($"");
                 Console.WriteLine($"");
                 Console.WriteLine($"###BinaryTreePrinter.RUN().");
-                Node a = new Node("One", null, null);
+                Node zero = new Node("Zero", null, null);
+                Node a = new Node("One", zero, null);
                 Node c = new Node("Three", null, null);
                 Node b = new Node("Two", a, c);
-                Node e = new Node("Five", null, null);
+                Node f = new Node("Six", null, null);
+                Node e = new Node("Five", null, f);
                 Node d = new Node("Four", b, e);
 
                 BinaryTreePrinter binaryTree = new BinaryTreePrinter(d);
@@ -71,6 +85,9 @@ namespace Interviews.DataStructures.BinaryTrees
                 BinaryTrees.PrintNodesInOrder(binaryTree.Head);
                 Console.WriteLine($"###Calling PrintNodesPreOrder({binaryTree.Head.Value}).");
                 BinaryTrees.PrintNodesPreOrder(binaryTree.Head);
+                Console.WriteLine($"###Calling GetTreeHeight({binaryTree.Head.Value}).");
+                int height = BinaryTrees.GetTreeHeight(binaryTree.Head, -1);
+                Console.WriteLine($"###Height = ({height}).");
             }
         }
 

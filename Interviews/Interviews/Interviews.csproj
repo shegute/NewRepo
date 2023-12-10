@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Interviews</RootNamespace>
     <AssemblyName>Interviews</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +51,7 @@
     <Compile Include="Quizes\IntegerTests.cs" />
     <Compile Include="DataStructures\SingleLinkedLists.cs" />
     <Compile Include="DataStructures\Sorting.cs" />
+    <Compile Include="Quizes\Quiz2.cs" />
     <Compile Include="Quizes\StringTests.cs" />
     <Compile Include="Quizes\Quizes.cs" />
     <Compile Include="Program.cs" />
