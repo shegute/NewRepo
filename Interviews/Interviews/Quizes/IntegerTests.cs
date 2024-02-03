@@ -9,7 +9,7 @@ namespace Interviews.Quizes.IntegerTests
     public class IntegerTests
     {
 
-        public void Print(int[] n)
+        public static void Print(int[] n)
         {
             Console.WriteLine($"Print array:");
 
@@ -47,6 +47,10 @@ namespace Interviews.Quizes.IntegerTests
             sample = -121;
             Console.WriteLine($"###Calling IsAPalindromNumber({sample}) on integer:");
             Console.WriteLine(integerTests.IsAPalindromNumber(sample));
+            int[] arr = new int[] { 1, 4, 20, 3, 10, 5 };
+            int targetSum = 33;
+            Console.WriteLine($"###Calling findSubArray({arr}, {targetSum}) on integer:");
+            Print( integerTests.findSubArray(arr,targetSum)) ;
         }
 
 
@@ -85,6 +89,34 @@ namespace Interviews.Quizes.IntegerTests
         {
             int digit = number % digitCounter; number = number / digitCounter;
             return new Tuple<int, int>(digit, number);
+        }
+
+        public int[] findSubArray(int[] arr, int targetSum)
+        {
+
+            for (int i = 0; i < arr.Length; i++)
+            {
+                int sum = 0;
+                int index = i;
+                while (sum < targetSum)
+                {
+                    sum += arr[index];
+                    index++;
+                }
+                if (sum == targetSum)
+                {
+
+                    List<int> subArray = new List<int>();
+
+                    for (int j = i; j < index; j++)
+                    { subArray.Add(arr[j]); }
+                    return subArray.ToArray();
+                }
+
+            }
+
+            return new int[0];
+
         }
     }
 }

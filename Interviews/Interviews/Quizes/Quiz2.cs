@@ -502,7 +502,7 @@ namespace Interviews.Quizes
 
         }
 
-        public static void Run()
+        public async static void Run()
         {
             Console.WriteLine("*** Random code for quick checks ***");
             //Run2();
@@ -526,6 +526,12 @@ namespace Interviews.Quizes
             Console.WriteLine("*** Perfect Number? ***");
             PerfectNumber.Run();
             VersionComparer.Run();
+            Console.WriteLine("*** MathExpression Evaluator   ***");
+            MathExpressionEvaluator.SimpleMathEvaluator.Run();
+            Console.WriteLine("*** Threading Options ***");
+            await ThreadingOptions.ThreadingOptions.Run();
+            Console.WriteLine("*** First Missing Positive ***");
+              FirstMissingPositive.FirstMissingPositive.Run();
         }
 
     }
@@ -1081,4 +1087,479 @@ namespace MultiValueDictionaryChallenge
         }
     }
 
+}
+
+
+namespace MathExpressionEvaluator
+{
+
+    using System;
+    using System.Collections.Generic;
+
+    class SimpleMathEvaluator
+    {
+        public static double Evaluate(string expression)
+        {
+            try
+            {
+                var tokens = Tokenize(expression);
+                var result = EvaluateTokens(tokens);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+                return double.NaN; // Return NaN for invalid expressions
+            }
+        }
+
+        private static List<string> Tokenize(string expression)
+        {
+            var tokens = new List<string>();
+            var currentToken = "";
+
+            foreach (var character in expression)
+            {
+                if (char.IsDigit(character) || character == '.')
+                {
+                    currentToken += character;
+                }
+                else if (IsOperator(character) || character == '(' || character == ')')
+                {
+                    if (!string.IsNullOrEmpty(currentToken))
+                    {
+                        tokens.Add(currentToken);
+                        currentToken = "";
+                    }
+
+                    tokens.Add(character.ToString());
+                }
+                else if (!char.IsWhiteSpace(character))
+                {
+                    throw new ArgumentException($"Invalid character in input: {character}");
+                }
+            }
+
+            if (!string.IsNullOrEmpty(currentToken))
+            {
+                tokens.Add(currentToken);
+            }
+
+            return tokens;
+        }
+
+        private static double EvaluateTokens(List<string> tokens)
+        {
+            var stack = new Stack<double>();
+            var operatorStack = new Stack<char>();
+
+            foreach (var token in tokens)
+            {
+                if (double.TryParse(token, out var operand))
+                {
+                    stack.Push(operand);
+                }
+                else if (IsOperator(token[0]))
+                {
+                    while (operatorStack.Count > 0 && Precedence(operatorStack.Peek()) >= Precedence(token[0]))
+                    {
+                        ApplyOperator(stack, operatorStack.Pop());
+                    }
+
+                    operatorStack.Push(token[0]);
+                }
+                else if (token == "(")
+                {
+                    operatorStack.Push('(');
+                }
+                else if (token == ")")
+                {
+                    while (operatorStack.Count > 0 && operatorStack.Peek() != '(')
+                    {
+                        ApplyOperator(stack, operatorStack.Pop());
+                    }
+
+                    if (operatorStack.Count == 0 || operatorStack.Pop() != '(')
+                    {
+                        throw new ArgumentException("Mismatched parentheses");
+                    }
+                }
+            }
+
+            while (operatorStack.Count > 0)
+            {
+                ApplyOperator(stack, operatorStack.Pop());
+            }
+
+            if (stack.Count != 1)
+            {
+                throw new ArgumentException("Invalid expression");
+            }
+
+            return stack.Pop();
+        }
+
+        private static void ApplyOperator(Stack<double> stack, char op)
+        {
+            if (stack.Count < 2)
+            {
+                throw new ArgumentException("Invalid expression");
+            }
+
+            var operand2 = stack.Pop();
+            var operand1 = stack.Pop();
+
+            switch (op)
+            {
+                case '+':
+                    stack.Push(operand1 + operand2);
+                    break;
+                case '-':
+                    stack.Push(operand1 - operand2);
+                    break;
+                case '*':
+                    stack.Push(operand1 * operand2);
+                    break;
+                case '/':
+                    stack.Push(operand1 / operand2);
+                    break;
+                default:
+                    throw new ArgumentException($"Unsupported operator: {op}");
+            }
+        }
+
+        private static bool IsOperator(char c)
+        {
+            return c == '+' || c == '-' || c == '*' || c == '/';
+        }
+
+        private static int Precedence(char op)
+        {
+            switch (op)
+            {
+                case '+':
+                case '-':
+                    return 1;
+                case '*':
+                case '/':
+                    return 2;
+                default:
+                    return 0; // Lower precedence for non-operators
+            }
+        }
+
+        public static void Run()
+        {
+            //Console.Write("Enter a math expression: ");
+            //var input = Console.ReadLine();
+            var input = "2 * (3 + 4) / 5";
+
+            var result = Evaluate(input);
+            if (!double.IsNaN(result))
+            {
+                Console.WriteLine($"Result: {result}");
+            }
+        }
+    }
+
+}
+
+namespace ThreadingOptions
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
+
+    class ThreadingOptions
+    {
+        public static async Task Run()
+        {
+            // List of URLs to download
+            List<string> urls = new List<string>
+            {
+             "https://www.example.com",
+             "https://www.example.org",
+             "https://www.example.net",
+             // Add more URLs as needed
+            };
+
+            Console.WriteLine("Sequential Download:");
+
+            // Sequential download using async/await
+            await DownloadUrlsSequentiallyAsync(urls);
+
+            Console.WriteLine("\nParallel Download using TPL:");
+
+            // Parallel download using Task Parallel Library (TPL)
+            await DownloadUrlsParallelAsync(urls);
+
+            Console.WriteLine("\nParallel Download using Parallel Class:");
+
+            // Parallel download using Parallel class
+            DownloadUrlsParallel(urls);
+
+            Console.WriteLine("\nAsync Download using async/await:");
+
+            // Async download using async/await
+            await DownloadUrlsAsync(urls);
+        }
+
+        static async Task DownloadUrlsSequentiallyAsync(List<string> urls)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                foreach (var url in urls)
+                {
+                    var response = await httpClient.GetStringAsync(url);
+                    Console.WriteLine($"Downloaded {url} ({response.Length} bytes)");
+                }
+            }
+        }
+
+        static async Task DownloadUrlsParallelAsync(List<string> urls)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                List<Task> downloadTasks = new List<Task>();
+
+                foreach (var url in urls)
+                {
+                    downloadTasks.Add(Task.Run(async () =>
+                    {
+                        var response = await httpClient.GetStringAsync(url);
+                        Console.WriteLine($"Downloaded {url} ({response.Length} bytes)");
+                    }));
+                }
+
+                await Task.WhenAll(downloadTasks);
+            }
+        }
+
+        static void DownloadUrlsParallel(List<string> urls)
+        {
+            Parallel.ForEach(urls, url =>
+            {
+                using (HttpClient httpClient = new HttpClient())
+                {
+                    var response = httpClient.GetStringAsync(url).Result;
+                    Console.WriteLine($"Downloaded {url} ({response.Length} bytes)");
+                }
+            });
+        }
+
+        static async Task DownloadUrlsAsync(List<string> urls)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                List<Task<string>> downloadTasks = new List<Task<string>>();
+
+                foreach (var url in urls)
+                {
+                    downloadTasks.Add(httpClient.GetStringAsync(url));
+                }
+
+                var responses = await Task.WhenAll(downloadTasks);
+
+                for (int i = 0; i < urls.Count; i++)
+                {
+                    Console.WriteLine($"Downloaded {urls[i]} ({responses[i].Length} bytes)");
+                }
+            }
+        }
+    }
+
+}
+
+namespace FirstMissingPositive
+{
+    class FirstMissingPositive
+    {
+        public static void Run()
+        {
+            int[] nums = { 3, 4, -1, 1 };
+            int result = FindMissingPositive(nums);
+            Console.WriteLine(result);
+        }
+
+        static int FindMissingPositive(int[] nums)
+        {
+            int length = nums.Length;
+            int currentSmallest = 1;
+            bool incrementCurrentSmallest = false;
+            while (true)
+            {
+                incrementCurrentSmallest = false;
+                foreach (int i in nums)
+                {
+                    if (i == currentSmallest)
+                    {
+                        currentSmallest++;
+                        incrementCurrentSmallest = true;
+                    }
+                }
+
+                if (!incrementCurrentSmallest)
+                {
+                    break;
+                }
+            }
+            return currentSmallest;
+        }
+
+    }
+
+    namespace Invoicing {
+
+
+        using System;
+        using System.Collections.Generic;
+        using System.Linq;
+
+        namespace InvoiceRepository.Tests
+        {
+
+            public class InvoiceRepository : IInvoiceRepository
+            {
+                IQueryable<Invoice> _invoices;
+
+                public InvoiceRepository(IQueryable<Invoice> invoices)
+                {
+                    // Console.WriteLine("Sample debug output");
+                    if (invoices == null)
+                    {
+                        throw new ArgumentNullException();
+                    }
+
+                    _invoices = invoices;
+                }
+
+                /// <summary>
+                /// Should return a total value of an invoice with a given id. If an invoice does not exist null should be returned.
+                /// </summary>
+                /// <param name="invoiceId"></param>
+                /// <returns></returns>
+                public decimal? GetTotal(int invoiceId)
+                {
+                    Invoice invoice = _invoices.FirstOrDefault(i => i.Id == invoiceId);
+                    if (invoice == null)
+                    {
+                        return null;
+                    }
+                    decimal totalValue = CalculateTotalValueOfInvoices(new List<Invoice>() { invoice });
+                    // foreach(InvoiceItem item in invoice.InvoiceItems)
+                    // {
+                    //     var currentValue = item.Count* item.Price;
+                    //     totalValue += currentValue;
+                    // }
+
+                    return totalValue;
+                }
+
+                /// <summary>
+                /// Should return a total value of all unpaid invoices.
+                /// </summary>
+                /// <returns></returns>
+                public decimal GetTotalOfUnpaid()
+                {
+
+                    decimal totalUnpaid;
+
+                    List<Invoice> unpaidInvoices = _invoices.Where(i => !i.AcceptanceDate.HasValue).ToList();
+
+                    decimal totalValue = CalculateTotalValueOfInvoices(unpaidInvoices);
+
+                    return totalValue;
+
+                }
+
+                /// <summary>
+                /// Should return a dictionary where the name of an invoice item is a key and the number of bought items is a value.
+                /// The number of bought items should be summed within a given period of time (from, to). Both the from date and the end date can be null.
+                /// </summary>
+                /// <param name="from"></param>
+                /// <param name="to"></param>
+                /// <returns></returns>
+                public IReadOnlyDictionary<string, long> GetItemsReport(DateTime? from, DateTime? to)
+                {
+                    List<Invoice> invoices = _invoices.Where(i => i.CreationDate >= from && i.CreationDate <= to).ToList();
+                    Dictionary<string, long> soldItemsCount = new Dictionary<string, long>();
+
+                    foreach (Invoice invoice in invoices)
+                    {
+                        foreach (InvoiceItem item in invoice.InvoiceItems)
+                        {
+                            if (soldItemsCount.ContainsKey(item.Name))
+                            {
+                                soldItemsCount[item.Name] += item.Count;
+                            }
+                            else
+                            {
+                                soldItemsCount.Add(item.Name, item.Count);
+                            }
+                        }
+                    }
+
+                    return soldItemsCount;
+                }
+
+                private decimal CalculateTotalValueOfInvoices(List<Invoice> invoices)
+                {
+                    decimal totalValue = 0;
+                    foreach (Invoice invoice in invoices)
+                    {
+                        foreach (InvoiceItem item in invoice.InvoiceItems)
+                        {
+                            var currentValue = item.Count * item.Price;
+                            totalValue += currentValue;
+                        }
+                    }
+                    return totalValue;
+                }
+            }
+
+            public interface IInvoiceRepository
+            {
+            }
+        }
+
+        // Please do not uncomment the classes.
+
+        public class Invoice
+        {
+            // A unique numerical identifier of an invoice (mandatory)
+            public int Id { get; set; }
+            // A short description of an invoice (optional).
+            public string Description { get; set; }
+            // A number of an invoice e.g. 134/10/2018 (mandatory).
+            public string Number { get; set; }
+            // An issuer of an invoice e.g. Metz-Anderson, 600  Hickman Street,Illinois (mandatory).
+            public string Seller { get; set; }
+            // A buyer of a service or a product e.g. John Smith, 4285  Deercove Drive, Dallas (mandatory).
+            public string Buyer { get; set; }
+            // A date when an invoice was issued (mandatory).
+            public DateTime CreationDate { get; set; }
+            // A date when an invoice was paid (optional).
+            public DateTime? AcceptanceDate { get; set; }
+            // A collection of invoice items for a given invoice (can be empty but is never null).
+            public IList<InvoiceItem> InvoiceItems { get; }
+
+            public Invoice()
+            {
+                InvoiceItems = new List<InvoiceItem>();
+            }
+        }
+        public class InvoiceItem
+        {
+            // A name of an item e.g. eggs.
+            public string Name { get; set; }
+            // A number of bought items e.g. 10.
+            public int Count { get; set; }
+            // A price of an item e.g. 20.5.
+            public decimal Price { get; set; }
+        }
+        
+    
+    }
 }

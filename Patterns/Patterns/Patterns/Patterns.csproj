@@ -61,6 +61,7 @@
     <Compile Include="ExamCode\Exam70-483\ThreadSynchronizationAuto.cs" />
     <Compile Include="ExamCode\Exam70-483\ThreadSynchronization.cs" />
     <Compile Include="ExamCode\Exam70-483\ThreadTimer.cs" />
+    <Compile Include="PatternCode\Behavioral\IteratorPattern2.cs" />
     <Compile Include="PatternCode\Behavioral\VisitorPattern.cs" />
     <Compile Include="PatternCode\Creational\AbstractFactoryPattern.cs" />
     <Compile Include="PatternCode\Creational\BuilderPattern.cs" />
